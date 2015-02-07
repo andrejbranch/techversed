@@ -1,3 +1,7 @@
 techversed_main_homepage:
+    path:     /
+    defaults: { _controller: TechversedMainBundle:Home:index }
+
+techversed_hello_test:
     path:     /hello/{name}
     defaults: { _controller: TechversedMainBundle:Default:index }

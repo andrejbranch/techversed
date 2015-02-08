@@ -7,7 +7,7 @@
   margin-left: auto;
   display: table;
   height: 55px;
-  background: url(/images/techversed_logo.png) no-repeat 258px;
+  background: url(/images/techversed_logo.png) no-repeat 278px;
   background-size: 200px;
 }
 #navigation-container ul li {
@@ -21,7 +21,7 @@
   text-align: center;
   line-height: 40px;
   margin-top: 8px;
-  margin-right: 10px;
+  margin-right: 20px;
   padding: 0 5px 0 5px;
 }
 #navigation-container ul li:hover {

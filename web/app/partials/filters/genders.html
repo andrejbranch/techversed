@@ -1,0 +1,31 @@
+<div id="targets-filter-container" ng-controller="GendersFilterController" class="utilities-filter-container">
+    <ul class="filters-users-list">
+        <li>
+            <input class="init-focus" ng-model="search" type="text" placeholder="Find Genders..."></input>
+        </li>
+        <ul class="selected" ng-if="filteredGenders.length">
+            <li ng-repeat="filteredGender in filteredGenders">
+                <label>
+                    <input
+                        ng-model="c"
+                        ng-checked="true"
+                        ng-change="toggleGender('remove', filteredGender)"
+                        type="checkbox"
+                    />
+                    <div class="description">{{filteredGender}}</div>
+                </label>
+            </li>
+        </ul>
+        <li ng-repeat="gender in genders | filter:search">
+            <label>
+                <input
+                    ng-model="c"
+                    ng-change="toggleGender('append', gender)"
+                    type="checkbox"
+                />
+                <div class="description">{{gender}}</div>
+            </label>
+        </li>
+        <li class="help">Start typing for Genders</li>
+    </ul>
+</div>

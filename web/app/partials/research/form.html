@@ -1,0 +1,66 @@
+<div class="modal-header">
+    <h3 ng-if="!research.id">Create Research</h3>
+    <h3 ng-if="research.id">Edit Research {{ research.id }}</h3>
+</div>
+<div class="ut-form-body">
+    <div class="modal-body" ut-modal-body>
+        <form id="sample-modal-form" class="form-horizontal">
+            <div class="space-medium">
+
+                <ut-control-group>
+                    <div ng-repeat="globalError in research.globalErrors" class="ut-global-error">
+                        {{globalError}}
+                    </div>
+                </ut-control-group>
+
+                <ut-control-group label="Title" required>
+                    <ut-input
+                        model="research.title"
+                        error="research.errors.title"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Lab Core">
+                    <ut-typeahead
+                        model="research.LabCore"
+                        key="research.lab_core"
+                        resource="lab-core-typeahead"
+                        placeholder="name"
+                        error="research.errors.lab_core"
+                    >
+                    </ut-typeahead>
+                </ut-control-group>
+
+
+                <ut-control-group label="Category" required>
+                    <select ng-model="research.category">
+                        <option value="Viruses">Viruses</option>
+                        <option value="Immunology">Immunology</option>
+                        <option value="Vaccines">Vaccines</option>
+                        <option value="Experience">Experience</option>
+                    </select>
+                    <div ng-if="research.errors.category" class="ut-global-error">{{research.errors.category}}</div>
+                </ut-control-group>
+
+                <ut-control-group label="Content" required>
+                    <textarea class="rich" ng-model="research.content" ut-rich-text-area></textarea>
+                    <div ng-if="research.errors.content" class="ut-global-error">{{research.errors.content}}</div>
+                </ut-control-group>
+
+                <div class="ut-form-divider"></div>
+
+                <ut-control-group label="Image">
+                    <ut-attachment-uploader o="VvcResearch" oid="research.id" trigger="handleUpload"></ut-attachment-uploader>
+                </ut-control-group>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="research.id">Save</a>
+        <a ng-if="!research.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

@@ -1,0 +1,51 @@
+<div class="modal-header">
+    <h3 ng-if="!cultureStatus.id">Create Culture Status</h3>
+    <h3 ng-if="cultureStatus.id">Edit Culture Status {{ cultureStatus.id }} - {{ cultureStatus.name }}</h3>
+</div>
+<div class="ut-form-body">
+    <div class="modal-body" ut-modal-body>
+        <form id="sample-modal-form" class="form-horizontal">
+            <div class="space-medium">
+
+                <ut-control-group>
+                    <div ng-repeat="globalError in cultureStatus.globalErrors" class="ut-global-error">
+                        {{globalError}}
+                    </div>
+                </ut-control-group>
+
+                <ut-control-group label="Status" required>
+                    <ut-typeahead
+                        model="cultureStatus.CultureStatusDetail"
+                        key="cultureStatus.statusDetailId"
+                        placeholder="name"
+                        resource="culture-status-detail"
+                        error="cultureStatus.errors.statusDetailId"
+                    >
+                    </ut-typeahead>
+                </ut-control-group>
+
+                <ut-control-group label="Date" required>
+                    <input
+                        type="text"
+                        datepicker-popup="M/dd/yyyy"
+                        ng-model="cultureStatus.date"
+                        class="ut-input"
+                    />
+                    <div ng-if="cultureStatus.errors.date" class="ut-global-error">{{cultureStatus.errors.date}}</div>
+                </ut-control-group>
+
+                <ut-control-group label="Notes">
+                    <textarea ng-model="cultureStatus.notes"></textarea>
+                </ut-control-group>
+
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="cultureStatus.id">Save</a>
+        <a ng-if="!cultureStatus.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

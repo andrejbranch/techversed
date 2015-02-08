@@ -1,0 +1,29 @@
+{
+  "name": "crowelab",
+  "title": "crowelab",
+  "description": "We make antibodies",
+  "version": "0.1.0",
+  "homepage": "https://github.com/crowelab/crowelab",
+  "author": {
+    "name": "Andre Jon Branchizio",
+    "email": "andrejbranch@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:crowelab/crowelab.git"
+  },
+  "dependencies": {
+    "grunt": "~0.4.0",
+    "jquery": "*",
+    "lodash": "1.0.1",
+    "grunt-contrib-less": "0.5.0",
+    "grunt-contrib-watch": "~0.3.1",
+    "grunt-rm": "0.0.4",
+    "temporary": "0.0.5",
+    "grunt-contrib-requirejs": "0.4.0",
+    "grunt-phpunit": "0.3.3",
+    "grunt-cache-bust": "0.3.9",
+    "grunt-angular-templates": "0.5.7"
+
+  }
+}

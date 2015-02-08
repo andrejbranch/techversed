@@ -1,0 +1,189 @@
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_top.html'"></div>
+
+<div id="ut-grid-table-container">
+    <table ng-if="mtas[0].gridParams.total">
+        <thead>
+            <tr>
+                <th ut-grid-header sort-field="id" label="Id"></th>
+                <th
+                    ut-grid-header
+                    sort-field="shortDescription"
+                    label="Short Description"
+                    ng-show="showColumns.indexOf('shortDescription') > -1"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Investigator"
+                    ng-show="showColumns.indexOf('investigator') > -1"
+                    sort-field="investigator"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Date Effective"
+                    ng-show="showColumns.indexOf('dateEffective') > -1"
+                    sort-field="dateEffective"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Agreement Number"
+                    ng-show="showColumns.indexOf('agreementNumber') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Materials"
+                    ng-show="showColumns.indexOf('materials') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Purpose"
+                    ng-show="showColumns.indexOf('purpose') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Status"
+                    ng-show="showColumns.indexOf('status') > -1"
+                    sort-field="status"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Provider"
+                    ng-show="showColumns.indexOf('provider') > -1"
+                    sort-field="provider"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Recipient"
+                    ng-show="showColumns.indexOf('recipient') > -1"
+                    sort-field="recipient"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="User"
+                    ng-show="showColumns.indexOf('userId') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Material Status"
+                    ng-show="showColumns.indexOf('materialStatus') > -1"
+                    sort-field="materialStatus"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="created_at"
+                    label="Created At"
+                    ng-show="showColumns.indexOf('created_at') > -1"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="updated_at"
+                    label="Updated At"
+                    ng-show="showColumns.indexOf('updated_at') > -1"
+                >
+                </th>
+                <th class="actions"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="mta in mtas" class="ut-fade">
+                <td ui-sref="mta({mtaId:mta.id})" class="link">{{mta.id}}</td>
+                <td
+                    ng-show="showColumns.indexOf('shortDescription') > -1"
+                    ui-sref="mta({mtaId:mta.id})"
+                    class="link"
+                >
+                    {{mta.shortDescription}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('investigator') > -1"
+                >
+                    {{mta.investigator}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('dateEffective') > -1"
+                >
+                    {{mta.dateEffective}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('agreementNumber') > -1"
+                >
+                    {{mta.agreementNumber}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('materials') > -1"
+                >
+                    {{mta.materials | truncate: 50}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('purpose') > -1"
+                >
+                    {{mta.purpose | truncate: 50}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('status') > -1"
+                >
+                    {{mta.status}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('provider') > -1"
+                >
+                    {{mta.provider}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('recipient') > -1"
+                >
+                    {{mta.recipient}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('userId') > -1"
+                    ui-sref="directory({userId:mta.User.u_id})" class="flat-link ut-flat-link-cursor"
+                >
+                    {{mta.User.fullName}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('materialStatus') > -1"
+                >
+                    {{mta.materialStatus}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('created_at') > -1"
+                >
+                    {{mta.created_at | utDate | date:'MM/dd/yy @ h:mma'}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('updated_at') > -1"
+                >
+                    {{mta.updated_at | utDate | date:'MM/dd/yy @ h:mma'}}
+                </td>
+                <td class="actions">
+                    <ut-dropdown
+                        icon="icon-cog"
+                        template="/app/partials/mta/grid_actions.html"
+                        data="mta"
+                    >
+                    </ut-dropdown>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div ng-if="!mtas[0].gridParams.total" class="no-results">
+        No Results Found
+    </div>
+</div>
+
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_bottom.html'"></div>

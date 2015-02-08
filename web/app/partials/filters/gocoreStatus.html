@@ -1,0 +1,31 @@
+<div id="samples-filter-container" ng-controller="GocoreStatusFilterController" class="utilities-filter-container">
+    <ul class="filters-users-list">
+        <li>
+            <input class="init-focus" ng-model="search" type="text" placeholder="Find Statuses..."></input>
+        </li>
+        <ul class="selected" ng-if="filteredStatuses.length">
+            <li ng-repeat="filteredStatus in filteredStatuses">
+                <label>
+                    <input
+                        ng-model="c"
+                        ng-checked="true"
+                        ng-change="toggleStatus('remove', filteredStatus)"
+                        type="checkbox"
+                    />
+                    <div class="description">{{filteredStatus.name}}</div>
+                </label>
+            </li>
+        </ul>
+        <li ng-repeat="status in statuses">
+            <label>
+                <input
+                    ng-model="c"
+                    ng-change="toggleStatus('append', status)"
+                    type="checkbox"
+                />
+                <div class="description">{{status.name}}</div>
+            </label>
+        </li>
+        <li class="help">Start typing for Statuses</li>
+    </ul>
+</div>

@@ -1,0 +1,168 @@
+<div class="modal-header">
+    <h3 ng-if="!publication.id">Create Publication</h3>
+    <h3 ng-if="publication.id">Edit Publication {{ publication.id }} - {{ publication.title }}</h3>
+</div>
+<div class="ut-form-body">
+    <div class="modal-body" ut-modal-body>
+        <form id="sample-modal-form" class="form-horizontal">
+            <div class="space-medium">
+
+                <ut-control-group>
+                    <div ng-repeat="globalError in publication.globalErrors" class="ut-global-error">
+                        {{globalError}}
+                    </div>
+                </ut-control-group>
+
+                <ut-control-group label="Title">
+                    <ut-input
+                        model="publication.title"
+                        error="publication.errors.title"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Pub Med Id">
+                    <ut-input
+                        model="publication.pub_med_id"
+                        error="publication.errors.pub_med_id"
+                        disabled="true"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Source">
+                    <ut-input
+                        model="publication.source"
+                        error="publication.errors.source"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Full Journal Name">
+                    <ut-input
+                        model="publication.full_journal_name"
+                        error="publication.errors.full_journal_name"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Volume">
+                    <ut-input
+                        model="publication.volume"
+                        error="publication.errors.volume"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Issue">
+                    <ut-input
+                        model="publication.issue"
+                        error="publication.errors.issue"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Pages">
+                    <ut-input
+                        model="publication.pages"
+                        error="publication.errors.pages"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Authors">
+                    <ut-input
+                        model="publication.authors"
+                        error="publication.errors.authors"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Last Author">
+                    <ut-input
+                        model="publication.last_author"
+                        error="publication.errors.last_author"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Publication Type(s)">
+                    <ut-input
+                        model="publication.pub_types"
+                        error="publication.errors.pub_types"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="ISSN">
+                    <ut-input
+                        model="publication.issn"
+                        error="publication.errors.issn"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="ESSN">
+                    <ut-input
+                        model="publication.essn"
+                        error="publication.errors.essn"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="NLM Unique Id">
+                    <ut-input
+                        model="publication.nlm_unique_id"
+                        error="publication.errors.nlm_unique_id"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Languages">
+                    <ut-input
+                        model="publication.languages"
+                        error="publication.errors.languages"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Publication Status">
+                    <ut-input
+                        model="publication.pub_status"
+                        error="publication.errors.pub_status"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Record Status">
+                    <ut-input
+                        model="publication.record_status"
+                        error="publication.errors.record_status"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Confirmed">
+                    <input
+                        type="checkbox"
+                        ng-model="publication.confirmed"
+                    >
+                    </input>
+                </ut-control-group>
+
+                <div class="ut-form-divider"></div>
+
+                <ut-control-group label="Attachments">
+                    <ut-attachment-uploader o="Publication" oid="publication.id" trigger="handleUpload"></ut-attachment-uploader>
+                </ut-control-group>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="publication.id">Save</a>
+        <a ng-if="!publication.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

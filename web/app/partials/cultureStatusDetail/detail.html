@@ -1,0 +1,77 @@
+<div id="ut-detail-container">
+    <div class="header">
+        <div class="operations">
+            <ut-dropdown
+                icon="operations-icon-share"
+                title="Share"
+                template="/app/partials/grid/share.html"
+            >
+            </ut-dropdown>
+        </div>
+        <img class="header-icon" src="/images/utilities/inventory/sample-icon.png" />
+        <ul class="ut-breadcrumbs">
+            <li ui-sref="gocore">GoCore</li>
+            <li ui-sref="cultureStatusDetailGrid.search">Cultures Status Details</li>
+            <li class="end">Culture Status Details {{cultureStatusDetail.id}}</li>
+            <li class="title">Culture Status Details - {{cultureStatusDetail.name}} </li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="toolbar" ng-if="canEdit()">
+            <button class="btn" ng-click="edit()">
+                <i class="icon-pencil" />
+                Edit
+            </button>
+            <button class="btn" ng-click="comment()"><i class="icon-comment" /> Comment</button>
+            <div class="right">
+                <img src="/images/utilities/inventory/trash_icon.png" ng-click="delete()"></img>
+            </div>
+        </div>
+        <div class="main-column">
+            <ut-edit-module title="Details">
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>Name:</td>
+                            <td>
+                                {{cultureStatusDetail.name}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sort Number:</td>
+                            <td>
+                                {{cultureStatusDetail.sort}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="detail-column">
+                    <table class="detail" id="antibody-request-table">
+                        <tr>
+                            <td>Color:</td>
+                            <td class="culture-status-{{cultureStatusDetail.color}}">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </ut-edit-module>
+
+            <ut-edit-module title="Attachments">
+                <ut-attachment-module
+                    o="CultureStatusDetail"
+                    oid="cultureStatusDetail.id"
+                >
+                </ut-attachment-module>
+            </ut-edit-module>
+
+            <ut-edit-module title="Activity">
+                <ut-activity-module
+                    o="CultureStatusDetail"
+                    oid="cultureStatusDetail.id"
+                    comment="comment"
+                >
+                </ut-activity-module>
+            </ut-edit-module>
+        </div>
+    </div>
+</div>

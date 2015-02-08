@@ -1,0 +1,152 @@
+    <div class="modal-header">
+    <h3 ng-if="!donor.id">Create Donor</h3>
+    <h3 ng-if="donor.id">Edit Donor {{ donor.id }} - {{ donor.toString }}</h3>
+</div>
+<div class="ut-form-body">
+    <div class="modal-body" ut-modal-body>
+        <form id="sample-modal-form" class="form-horizontal">
+            <div class="space-medium">
+
+                <ut-control-group>
+                    <div ng-repeat="globalError in donor.globalErrors" class="ut-global-error">
+                        {{globalError}}
+                    </div>
+                </ut-control-group>
+
+                <div ng-if="isCtcUser()">
+
+                    <ut-control-group label="First Name">
+                        <ut-input
+                            model="donor.first_name"
+                            error="donor.errors.first_name"
+                        >
+                        </ut-input>
+                    </ut-control-group>
+
+                    <ut-control-group label="Last Name">
+                        <ut-input
+                            model="donor.last_name"
+                            error="donor.errors.last_name"
+                        >
+                        </ut-input>
+                    </ut-control-group>
+
+                    <ut-control-group label="Phone">
+                        <ut-input
+                            model="donor.phone"
+                            error="donor.errors.phone"
+                        >
+                        </ut-input>
+                    </ut-control-group>
+
+                    <ut-control-group label="Email">
+                        <ut-input
+                            model="donor.email"
+                            error="donor.errors.email"
+                        >
+                        </ut-input>
+                    </ut-control-group>
+
+                    <ut-control-group label="Address">
+                        <ut-input
+                            model="donor.address"
+                            error="donor.errors.address"
+                        >
+                        </ut-input>
+                    </ut-control-group>
+
+                    <div class="ut-form-divider"></div>
+                </div>
+
+                <ut-control-group label="Aliases">
+                    <ut-input
+                        model="donor.aliases"
+                        error="donor.errors.aliases"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Species">
+                    <ut-typeahead
+                        model="donor.Species"
+                        key="donor.species_id"
+                        resource="species"
+                        placeholder="name"
+                        error="donor.errors.species"
+                    >
+                    </ut-typeahead>
+                </ut-control-group>
+
+                <ut-control-group label="Race">
+                    <ut-typeahead
+                        model="donor.Race"
+                        key="donor.race_id"
+                        resource="race"
+                        placeholder="name"
+                        error="donor.errors.race"
+                    >
+                    </ut-typeahead>
+                </ut-control-group>
+
+               <ut-control-group label="Ethnicity">
+                    <ut-typeahead
+                        model="donor.Ethnicity"
+                        key="donor.ethnicity_id"
+                        resource="ethnicity"
+                        placeholder="name"
+                        error="donor.errors.ethnicity"
+                    >
+                    </ut-typeahead>
+                </ut-control-group>
+
+                <ut-control-group label="Gender" required>
+                    <select ng-model="donor.gender">
+                        <option value=""></option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Unknown">Unknown</option>
+                    </select>
+                    <div ng-if="donor.errors.gender" class="ut-global-error">{{donor.errors.gender}}</div>
+                </ut-control-group>
+
+                <ut-control-group label="Age">
+                    <ut-input
+                        model="donor.age"
+                        error="donor.errors.age"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Immunities / Targets" class="ut-many-input-max-width">
+                    <ut-one-to-many
+                        resource="target"
+                        model="donor"
+                        foreign-key="immunityId"
+                        relation="DonorImmunities"
+                        access="donor.immunities"
+                        placeholder="name"
+                    />
+                    </ut-one-to-many>
+                </ut-control-group>
+
+                <ut-control-group label="Notes" ng-if="isCtcUser()">
+                    <textarea ng-model="donor.notes"></textarea>
+                    <div ng-if="donor.errors.notes" class="ut-global-error">{{donor.errors.notes}}</div>
+                </ut-control-group>
+
+                <div class="ut-form-divider"></div>
+
+                <ut-control-group label="Attachments">
+                    <ut-attachment-uploader o="Donor" oid="donor.id" trigger="handleUpload"></ut-attachment-uploader>
+                </ut-control-group>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="donor.id">Save</a>
+        <a ng-if="!donor.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

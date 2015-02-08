@@ -1,0 +1,53 @@
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_top.html'"></div>
+<div id="ut-grid-table-container">
+    <table ng-if="species[0].gridParams.total">
+        <thead>
+            <tr>
+                <th ut-grid-header sort-field="id" label="Id"></th>
+                <th
+                    ut-grid-header
+                    label="Name"
+                    ng-show="showColumns.indexOf('name') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Common Name"
+                    ng-show="showColumns.indexOf('common_name') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="species in species" class="ut-fade">
+                <td ui-sref="species({speciesId:species.id})" class="link">{{species.id}}</td>
+                <td
+                    ng-show="showColumns.indexOf('name') > -1"
+                >
+                    {{species.name}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('common_name') > -1"
+                >
+                    {{species.common_name}}
+                </td>
+                <td class="actions">
+                    <ut-dropdown
+                        icon="icon-cog"
+                        template="/app/partials/species/grid_actions.html"
+                        data="species"
+                    >
+                    </ut-dropdown>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div ng-if="!species[0].gridParams.total" class="no-results">
+        No Results Found
+    </div>
+</div>
+
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_bottom.html'"></div>

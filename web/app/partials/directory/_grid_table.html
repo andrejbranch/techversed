@@ -1,0 +1,176 @@
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_top.html'"></div>
+<div id="ut-grid-table-container">
+    <table ng-if="users[0].gridParams.total">
+        <thead>
+            <tr>
+                <th ut-grid-header sort-field="u_id" label="Id"></th>
+                <th
+                    ut-grid-header
+                    sort-field="u_first_name"
+                    label="First Name"
+                    ng-show="showColumns.indexOf('u_first_name') > -1"
+                    allow-sort="true"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="u_last_name"
+                    label="Last Name"
+                    ng-show="showColumns.indexOf('u_last_name') > -1"
+                    allow-sort="true"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="User Name"
+                    ng-show="showColumns.indexOf('u_user_name') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Email"
+                    ng-show="showColumns.indexOf('u_email') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Office Phone"
+                    ng-show="showColumns.indexOf('u_office_phone') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Mobile Phone"
+                    ng-show="showColumns.indexOf('u_mobile_phone') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Room Number"
+                    ng-show="showColumns.indexOf('u_office_room') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Degree"
+                    ng-show="showColumns.indexOf('u_degree') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Role"
+                    ng-show="showColumns.indexOf('u_role') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Member Status"
+                    ng-show="showColumns.indexOf('u_lab_membership') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Lab Core"
+                    ng-show="showColumns.indexOf('lab_core') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Created At"
+                    ng-show="showColumns.indexOf('created_at') > -1"
+                    allow-sort="true"
+                    sort-field="created_at"
+                >
+                </th>
+                <th ut-grid-header allow-sort="false"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in users" class="ut-fade">
+                <td ui-sref="directory({userId:user.u_id})" class="link">{{user.u_id}}</td>
+                <td
+                    ng-show="showColumns.indexOf('u_first_name') > -1"
+                >
+                    {{user.u_first_name}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('u_last_name') > -1"
+                >
+                    {{user.u_last_name}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('u_user_name') > -1"
+                >
+                    {{user.u_user_name}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('u_email') > -1"
+                >
+                    {{user.u_email}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('u_office_phone') > -1"
+                >
+                    {{user.u_office_phone}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('u_mobile_phone') > -1"
+                >
+                    {{user.u_mobile_phone}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('u_office_room') > -1"
+                >
+                    {{user.u_office_room}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('u_degree') > -1"
+                >
+                    {{user.u_degree}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('u_role') > -1"
+                >
+                    {{user.u_role}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('u_lab_membership') > -1"
+                >
+                    {{user.u_lab_membership}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('lab_core') > -1"
+                >
+                    {{user.LabCore.name}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('created_at') > -1"
+                >
+                    {{user.created_at | utDate | date:'MM/dd/yy @ h:mma'}}
+                </td>
+                <td class="actions">
+                    <ut-dropdown
+                        icon="icon-cog"
+                        template="/app/partials/directory/grid_actions.html"
+                        data="user"
+                    >
+                    </ut-dropdown>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div ng-if="!users[0].gridParams.total" class="no-results">
+        No Results Found
+    </div>
+</div>
+
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_bottom.html'"></div>

@@ -1,0 +1,143 @@
+<div id="ut-detail-container" class="ut-classification-detail-container">
+    <div class="header">
+        <div class="operations">
+            <ut-dropdown
+                icon="operations-icon-share"
+                title="Share"
+                template="/app/partials/grid/share.html"
+            >
+            </ut-dropdown>
+        </div>
+        <img class="header-icon big" src="/images/utilities/inventory/travel-icon.png" />
+        <ul class="ut-breadcrumbs">
+            <li ui-sref="adminCore">Admin Core</li>
+            <li ui-sref="travelLogGrid.search">Travel Logs</li>
+            <li class="end">{{travelLog.id}}</li>
+            <li class="title">{{travelLog.event}}</li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="toolbar">
+            <button class="btn" ng-click="edit()" ng-if="canEdit()">
+                <i class="icon-pencil" />
+                Edit
+            </button>
+            <button class="btn" ng-click="comment()"><i class="icon-comment" /> Comment</button>
+            <div class="right">
+                <img src="/images/utilities/inventory/trash_icon.png" ng-click="openDelete()"></img>
+            </div>
+        </div>
+        <div class="main-column">
+                <ut-edit-module title="Details">
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>TAF:</td>
+                            <td>{{travelLog.taf}}</td>
+                        </tr>
+                        <tr>
+                            <td>Traveler:</td>
+                            <td>{{travelLog.Traveler.fullName}}</td>
+                        </tr>
+                        <tr>
+                            <td>Event:</td>
+                            <td>{{travelLog.event}}</td>
+                        </tr>
+                        <tr>
+                            <td>Location:</td>
+                            <td>{{travelLog.location}}</td>
+                        </tr>
+                         <tr>
+                            <td>Purpose:</td>
+                            <td>{{travelLog.purpose}}</td>
+                        </tr>
+                        <tr>
+                            <td>Projected Center:</td>
+                            <td>{{travelLog.projected_center}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>Estimated Cost:</td>
+                            <td>{{travelLog.estimated_cost}}</td>
+                        </tr>
+                        <tr>
+                            <td>RBV Whole:</td>
+                            <td>{{travelLog.rbv_whole}}</td>
+                        </tr>
+                        <tr>
+                            <td>RBV in part:</td>
+                            <td>{{travelLog.rbv_in_part}}</td>
+                        </tr>
+                        <tr>
+                            <td>RBV non VUMC:</td>
+                            <td>{{travelLog.rbv_non_vumc}}</td>
+                        </tr>
+                        <tr>
+                            <td>Actual Cost:</td>
+                            <td>{{travelLog.actual_cost}}</td>
+                        </tr>
+                        <tr>
+                            <td>Actual Center:</td>
+                            <td>{{travelLog.actual_center}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </ut-edit-module>
+
+            <ut-edit-module title="Comments">
+                <div ng-bind-html="travelLog.comments"></div>
+            </ut-edit-module>
+
+            <ut-edit-module title="Attachments">
+                <ut-attachment-module
+                    o="TravelLog"
+                    oid="travelLog.id"
+                >
+                </ut-attachment-module>
+            </ut-edit-module>
+
+            <ut-edit-module title="Activity">
+                <ut-activity-module
+                    o="TravelLog"
+                    oid="travelLog.id"
+                    comment="comment"
+                >
+                </ut-activity-module>
+            </ut-edit-module>
+        </div>
+
+        <div class="side-column">
+            <ut-edit-module title="Approval">
+                <table class="detail">
+                    <tr>
+                        <td>Status:</td>
+                        <td>
+                            {{travelLog.status}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Approver:</td>
+                        <td>
+                            {{travelLog.Approver.fullName}}
+                        </td>
+                    </tr>
+                </table>
+            </ut-edit-module>
+            <ut-edit-module title="Dates">
+                <table class="detail">
+                    <tr>
+                        <td>Departure Date:</td>
+                        <td>{{ travelLog.departure_date | utDate | date:'MM/dd/yy @ h:mma'}}</td>
+                    </tr>
+                                        <tr>
+                        <td>Return Date:</td>
+                        <td>{{ travelLog.return_date | utDate | date:'MM/dd/yy @ h:mma'}}</td>
+                    </tr
+                </table>
+            </ut-edit-module>
+        </div>
+    </div>
+</div>

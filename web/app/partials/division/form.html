@@ -1,0 +1,30 @@
+<div class="modal-header">
+    <h3 ng-if="!division.id">Create Division in freezer {{division.freezerId}}</h3>
+    <h3 ng-if="division.id">Edit Division {{division.id}}</h3>
+</div>
+<div class="modal-body" ut-modal-body>
+    <form id="division-form-container" class="form-horizontal">
+        <div class="space-medium">
+
+            <ut-control-group>
+                <div ng-repeat="globalError in division.globalErrors" class="ut-global-error">
+                    {{globalError}} </div>
+            </ut-control-group>
+
+            <ut-control-group label="Name">
+                <ut-input
+                    model="division.name"
+                    error="division.errors.name"
+                >
+                </ut-input>
+            </ut-control-group>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="division.id">Save</a>
+        <a ng-if="!division.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

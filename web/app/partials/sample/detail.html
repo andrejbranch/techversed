@@ -1,0 +1,202 @@
+<div id="ut-detail-container">
+    <div class="header">
+        <div class="operations">
+            <ut-dropdown
+                icon="operations-icon-share"
+                title="Share"
+                template="/app/partials/grid/share.html"
+            >
+            </ut-dropdown>
+        </div>
+        <img class="header-icon" src="/images/utilities/inventory/sample-icon.png" />
+        <ul class="ut-breadcrumbs">
+            <li ui-sref="croweLab">Crowelab</li>
+            <li ui-sref="sampleGrid.search">Samples</li>
+            <li class="end">Sample {{sample.id}}</li>
+            <li class="title">{{sample.description}}</li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="toolbar">
+            <button class="btn" ng-click="edit()">
+                <i class="icon-pencil" />
+                Edit
+            </button>
+            <button class="btn" ng-click="comment()"><i class="icon-comment" /> Comment</button>
+            <ut-dropdown
+                title="More"
+                template="/app/partials/sample/sample_detail_more_dropdown.html"
+                data="sample"
+            >
+            </ut-dropdown>
+        </div>
+        <div class="main-column">
+            <ut-edit-module title="Details">
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>Sample Type:</td>
+                            <td>
+                                <a ui-sref="sampleType({sampleTypeId:sample.SampleType.id})" class="flat-link" class="ut-link-cursor">{{sample.SampleType.name}}</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Target:</td>
+                            <td>
+                                <a ui-sref="target({targetId:sample.Target.id})" class="flat-link">{{sample.Target.name}}</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Molecule:</td>
+                            <td>
+                                <a ui-sref="molecule({moleculeId:sample.Molecule.id})" class="flat-link">{{sample.Molecule.name}}</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tag:</td>
+                            <td>
+                                <a ui-sref="tag({tagId:sample.Tag.id})" class="flat-link" class="ut-link-cursor">{{sample.Tag.name}}</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>Parent:</td>
+                            <td>
+                                <a class="flat-link" ui-sref="sample({sampleId:sample.Parent.id})">{{sample.Parent.description}}</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Aliases:</td>
+                            <td>{{sample.aliases}}</td>
+                        </tr>
+                        <tr>
+                            <td>Protocol:</td>
+                            <td>
+                                <a class="flat-link" ui-sref="protocol({protocolId:sample.Protocol.id})">{{sample.Protocol.protocol}}</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </ut-edit-module>
+            <ut-edit-module title="Attachments">
+                <ut-attachment-module
+                    o="Sample"
+                    oid="sample.id"
+                >
+                </ut-attachment-module>
+            </ut-edit-module>
+            <ut-edit-module title="Notes">
+                <div ng-bind-html="sample.notes"></div>
+            </ut-edit-module>
+            <ut-edit-module title="Activity">
+                <ut-activity-module
+                    o="Sample"
+                    oid="sample.id"
+                    comment="comment"
+                >
+                </ut-activity-module>
+            </ut-edit-module>
+        </div>
+
+        <div class="side-column">
+            <ut-edit-module title="People">
+                <table class="detail">
+                    <tr>
+                        <td>Creator:</td>
+                        <td>
+                            <img ng-if="sample.user_id" ng-src="/profile/avatar/{{sample.user_id}}" />
+                            {{sample.User.fullName}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Donor:</td>
+                        <td>
+                            <a class="flat-link" ui-sref="donor({donorId:sample.Donor.id})">{{sample.Donor.toString}}</a>
+                        </td>
+                    </tr>
+                </table>
+            </ut-edit-module>
+            <ut-edit-module title="Dates">
+                <table class="detail">
+                    <tr>
+                        <td>Created:</td>
+                        <td>{{ sample.created_at | utDate | date:'MM/dd/yy @ h:mma'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Updated:</td>
+                        <td>{{ sample.updated_at | utDate | date:'MM/dd/yy @ h:mma'}}</td>
+                    </tr>
+                </table>
+            </ut-edit-module>
+            <ut-edit-module title="Location">
+                <table class="detail">
+                    <tr ng-repeat="boxWithSample in boxesWithSample">
+                        <td>Box {{boxWithSample.id}}:</td>
+                        <td>
+                            <a ui-sref="boxView.search({boxId:boxWithSample.id, sampleId: sample.id})">
+                                {{boxWithSample.heading}}
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><i class="icon-plus" /></td>
+                        <td><a ui-sref="boxView.search({boxId:322, sampleId:sample.id})" class="link">Add to box</a></td>
+                    </tr>
+                </table>
+            </ut-edit-module>
+            <ut-edit-module title="VIMs">
+                <table class="detail">
+                    <tr>
+                        <td style="vertical-align: top">VIM Orders:</td>
+                        <td>
+                            <ul>
+                                <li ng-repeat="vimOrder in sample.vimOrders">
+                                    <a ng-if="!$last" class="flat-link" ng-href="/vim/order/{{vimOrder.id}}">
+                                        {{"VIM Order " + vimOrder.id + " " + vimOrder.vim_order_description + ",&nbsp;" }}
+                                    </a>
+                                    <a ng-if="$last" class="flat-link" ng-href="/vim/order/{{vimOrder.id}}">
+                                        {{"VIM Order " + vimOrder.id + " " + vimOrder.vim_order_description}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: top">VIM Shipments :</td>
+                        <td>
+                            <ul>
+                                <li ng-repeat="vimSent in sample.vimSents">
+                                    <a ng-if="!$last" class="flat-link" ng-href="/vim/sent/{{vimSent.id}}">
+                                        {{"VIM Sent " + vimSent.id + " " + vimSent.vim_sent_description + ",&nbsp;" }}
+                                    </a>
+                                    <a ng-if="$last" class="flat-link" ng-href="/vim/sent/{{vimSent.id}}">
+                                        {{"VIM Sent " + vimSent.id + " " + vimSent.vim_sent_description}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </ut-edit-module>
+            <ut-edit-module title="Related Publications">
+                <table class="detail">
+                    <tr>
+                        <td style="vertical-align: top">Publications:</td>
+                        <td>
+                            <ul>
+                                <li ng-repeat="publication in sample.publications" class="publication">
+                                    <a class="flat-link" ui-sref="publication({publicationId:publication.id})">
+                                        {{publication.title | truncate:100}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </ut-edit-module>
+        </div>
+    </div>
+</div>

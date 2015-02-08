@@ -1,0 +1,31 @@
+<div id="repository-samples-container" ng-controller="RepositorySampleController">
+    <div class="plus-icon" ng-click="addSample()">
+        <i class="icon-pencil" ng-click="createRepositorySample()"></i>
+    </div>
+    <table>
+        <thead>
+            <th>Id</th>
+            <th>Description</th>
+            <th>Citations</th>
+            <th>Frozen</th>
+            <th># of Vials</th>
+            <th>Sequence</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="repositorySample in repositorySamples" class="ut-fade">
+                <td class="link" ui-sref="sample({sampleId:repositorySample.Sample.id})">{{repositorySample.Sample.id}}</td>
+                <td>{{repositorySample.Sample.description}}</td>
+                <td></td>
+                <td>{{repositorySample.numVials ? "Yes" : "No"}}</td>
+                <td ng-class="{link:repositorySample.numVials}">
+                    <a ng-if="repositorySample.numVials" ui-sref="boxView.search({boxId:322, sampleId:repositorySample.Sample.id})">{{repositorySample.numVials}}</a>
+                    <a ng-if="!repositorySample.numVials">{{repositorySample.numVials}}</a>
+                </td>
+                <td>
+                    <a ng-if="repositorySample.hasSequence" href="/seeq/fl-seqs">Yes</a>
+                    <a ng-if="!repositorySample.hasSequence">No</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

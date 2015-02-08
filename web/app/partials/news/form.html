@@ -1,0 +1,73 @@
+<div class="modal-header">
+    <h3 ng-if="!news.id">Create News</h3>
+    <h3 ng-if="news.id">Edit News {{ news.id }}</h3>
+</div>
+<div class="ut-form-body">
+    <div class="modal-body" ut-modal-body>
+        <form id="sample-modal-form" class="form-horizontal">
+            <div class="space-medium">
+
+                <ut-control-group>
+                    <div ng-repeat="globalError in news.globalErrors" class="ut-global-error">
+                        {{globalError}}
+                    </div>
+                </ut-control-group>
+
+                <ut-control-group label="Title" required>
+                    <ut-input
+                        model="news.title"
+                        error="news.errors.title"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Lab Core">
+                    <ut-typeahead
+                        model="news.LabCore"
+                        key="news.lab_core"
+                        resource="lab-core-typeahead"
+                        placeholder="name"
+                        error="news.errors.lab_core"
+                    >
+                    </ut-typeahead>
+                </ut-control-group>
+
+                <ut-control-group label="Date" required>
+                    <input
+                        type="text"
+                        datepicker-popup="M/dd/yyyy"
+                        ng-model="news.date"
+                        class="ut-input"
+                    />
+                    <div ng-if="news.errors.date" class="ut-global-error">{{news.errors.date}}</div>
+                </ut-control-group>
+
+                <ut-control-group label="Published">
+                    <input
+                        type="checkbox"
+                        ng-model="news.published"
+                    >
+                    </input>
+                </ut-control-group>
+
+                <ut-control-group label="Content" required>
+                    <textarea class="rich ut-big-text-input" ng-model="news.content"></textarea>
+                    <div ng-if="news.errors.content" class="ut-global-error">{{news.errors.content}}</div>
+                </ut-control-group>
+
+                <div class="ut-form-divider"></div>
+
+                <ut-control-group label="Image">
+                    <ut-attachment-uploader o="VvcNews" oid="news.id" trigger="handleUpload"></ut-attachment-uploader>
+                </ut-control-group>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="news.id">Save</a>
+        <a ng-if="!news.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

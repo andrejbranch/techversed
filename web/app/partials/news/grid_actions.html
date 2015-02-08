@@ -1,0 +1,7 @@
+<div id="ut-grid-actions" ng-controller="NewsGridActionsController">
+   <ul class="filters-users-list">
+        <li ui-sref="news({newsId:data.id})"><i class="icon-file" />View</li>
+        <li ng-if="canEdit()" ng-click="openEdit()"><i class="icon-pencil" />Edit</li>
+        <li ng-if="canDelete()" ng-click="openDelete()"><i class="icon-trash" />Delete</li>
+    </ul>
+</div>

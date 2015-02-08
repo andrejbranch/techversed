@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <h3>Add Sample {{sample.id}} to Repositories</h3>
+</div>
+<div class="modal-body" ut-modal-body>
+    <div id="ut-comment-modal">
+        <div class="form-horizontal">
+            <p class="text-error">Please select the repositories</p>
+
+            <ut-control-group label="Repositories" class="ut-many-input-max-width">
+                <ut-one-to-many
+                    resource="repository"
+                    model="sample"
+                    foreign-key="repositoryId"
+                    relation="RepositorySamples"
+                    access="sample.repositories"
+                    placeholder="title"
+                />
+                </ut-one-to-many>
+            </ut-control-group>
+
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a>Save</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

@@ -1,0 +1,51 @@
+<div id="drive-main-container">
+    <div class="header">
+        <div class="close" ng-click="close()">X</div>
+        <ut-drive-dropdown
+            icon="icon-cog"
+            title=""
+            template="/app/partials/drive/action-dropdown.html"
+        >
+        </ut-drive-dropdown>
+    </div>
+    <table>
+        <tr>
+            <td>
+                <div class="sidebar" ng-controller="DriveSidebarController">
+                    <ul>
+                        <li ng-repeat="folder in folders" ng-click="selectFolder(folder)" ng-class="{selected:isSelected(folder)}">
+                            <div class="{{getFolderImageClass(folder)}}"></div>
+                            <a ng-if="folder.isUserDirectory">My Drive</a>
+                            <a ng-if="!folder.isUserDirectory">{{folder.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+            <td class="main-cell">
+                <div class="main-view" ng-controller="DriveMainViewController" ng-class="{'folder-view-enabled':folderViewEnabled()}">
+                    <div class="folder-view" ng-show="folderViewEnabled()">
+                        <ul>
+                            <li ng-repeat='folder in folders'>
+                                <ut-drive-folder folder="folder"></ut-drive-folder>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="file-view" ng-if="fileViewEnabled()">
+                        laksdjflaskdjf
+                    </div>
+                    <div class="upload-view" ng-if="uploadViewEnabled()">
+                        <div class="progress-header-img"></div>
+                        <div class="progress-header">Uploading {{fileBeingUploaded}}</div>
+                        <div class="progress">
+                            <progressbar type="success" width="percentUploaded"></progressbar>
+                        </div>
+                    </div>
+                    <div class="download-view" ng-if="downloadViewEnabled()">
+                        <div class="archive-header-img"></div>
+                        <div class="archive-header">Archiving... please wait</div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

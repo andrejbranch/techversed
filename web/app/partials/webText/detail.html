@@ -1,0 +1,54 @@
+<div id="ut-detail-container" class="ut-classification-detail-container">
+    <div class="header">
+        <div class="operations">
+            <ut-dropdown
+                icon="operations-icon-share"
+                title="Share"
+                template="/app/partials/grid/share.html"
+            >
+            </ut-dropdown>
+        </div>
+        <img class="header-icon big" src="/images/utilities/inventory/web-text-icon.png" />
+        <ul class="ut-breadcrumbs">
+            <li ui-sref="adminCore">Admin Core</li>
+            <li ui-sref="webTextGrid.search">Web Text</li>
+            <li class="end">{{webText.id}}</li>
+            <li class="title">{{webText.name}}</li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="toolbar">
+            <button class="btn" ng-click="edit()" ng-if="canEdit()">
+                <i class="icon-pencil" />
+                Edit
+            </button>
+            <button class="btn" ng-click="comment()"><i class="icon-comment" /> Comment</button>
+            <div class="right">
+                <img src="/images/utilities/inventory/trash_icon.png" ng-click="openDelete()"></img>
+            </div>
+        </div>
+        <div class="main-column full-width">
+
+            <ut-edit-module title="Value">
+                <div ng-bind-html="webText.value"></div>
+            </ut-edit-module>
+
+            <ut-edit-module title="Attachments">
+                <ut-attachment-module
+                    o="WebText"
+                    oid="webText.id"
+                >
+                </ut-attachment-module>
+            </ut-edit-module>
+
+            <ut-edit-module title="Activity">
+                <ut-activity-module
+                    o="WebText"
+                    oid="webText.id"
+                    comment="comment"
+                >
+                </ut-activity-module>
+            </ut-edit-module>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,111 @@
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_top.html'"></div>
+<div id="ut-grid-table-container">
+    <table ng-if="presets[0].gridParams.total">
+        <thead>
+            <tr>
+                <th ut-grid-header sort-field="id" label="Id"></th>
+                <th
+                    ut-grid-header
+                    label="Name"
+                    ng-show="showColumns.indexOf('name') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Sample Type"
+                    ng-show="showColumns.indexOf('sample_type_id') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Molecule"
+                    ng-show="showColumns.indexOf('molecule_id') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Tag"
+                    ng-show="showColumns.indexOf('tag_id') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Parent"
+                    ng-show="showColumns.indexOf('parent_id') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Target"
+                    ng-show="showColumns.indexOf('target_id') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="preset in presets" class="ut-fade">
+                <td ui-sref="preset({presetId:preset.id})" class="link">{{preset.id}}</td>
+                <td
+                    ng-show="showColumns.indexOf('name') > -1"
+                >
+                    {{preset.name}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('sample_type_id') > -1"
+                >
+                    <a ui-sref="sampleType({sampleTypeId:preset.SampleType.id})" class="flat-link" class="ut-link-cursor">
+                        {{preset.SampleType.name}}
+                    </a>
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('molecule_id') > -1"
+                >
+                    <a ui-sref="molecule({moleculeId:preset.Molecule.id})" class="flat-link" class="ut-link-cursor">
+                        {{preset.Molecule.name}}
+                    </a>
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('tag_id') > -1"
+                >
+                    <a ui-sref="tag({tagId:preset.Tag.id})" class="flat-link" class="ut-link-cursor">
+                        {{preset.Tag.name}}
+                    </a>
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('parent_id') > -1"
+                >
+                    <a ui-sref="sample({sampleId:preset.Parent.id})" class="flat-link" class="ut-link-cursor">
+                        {{preset.Parent.description}}
+                    </a>
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('target_id') > -1"
+                >
+                    <a ui-sref="target({targetId:preset.Target.id})" class="flat-link" class="ut-link-cursor">
+                        {{preset.Target.name}}
+                    </a>
+                </td>
+                <td class="actions">
+                    <ut-dropdown
+                        icon="icon-cog"
+                        template="/app/partials/preset/grid_actions.html"
+                        data="preset"
+                    >
+                    </ut-dropdown>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div ng-if="!presets[0].gridParams.total" class="no-results">
+        No Results Found
+    </div>
+</div>
+
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_bottom.html'"></div>

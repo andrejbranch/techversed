@@ -1,0 +1,92 @@
+<div id="ut-detail-container">
+    <div class="header">
+        <div class="operations">
+            <ut-dropdown
+                icon="operations-icon-share"
+                title="Share"
+                template="/app/partials/grid/share.html"
+            >
+            </ut-dropdown>
+        </div>
+        <img class="header-icon big" ng-if="user.u_id" ng-src="/profile/avatar/{{user.u_id}}" />
+        <ul class="ut-breadcrumbs">
+            <li onclick="window.location='/'">Home</li>
+            <li ui-sref="directoryGrid.search">Directory</li>
+            <li class="end">{{user.u_id}}</li>
+            <li class="title">{{user.u_first_name}} {{user.u_last_name}}</li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="toolbar">
+            <button class="btn" ng-click="edit()" ng-if="canEdit()">
+                <i class="icon-pencil" />
+                Edit
+            </button>
+            <button class="btn" ng-click="comment()"><i class="icon-comment" /> Comment</button>
+        </div>
+        <div class="main-column full-width">
+            <ut-edit-module title="Details">
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>Lab Core:</td>
+                            <td>{{user.labCore.name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Room Number:</td>
+                            <td>{{user.u_office_room}}</td>
+                        </tr>
+                        <tr>
+                            <td>Member Status:</td>
+                            <td>{{user.u_lab_membership}}</td>
+                        </tr>
+                        <tr>
+                            <td>Degree:</td>
+                            <td>{{user.u_degree}}</td>
+                        </tr>
+                        <tr>
+                            <td>Role:</td>
+                            <td>{{user.u_role}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>User Name:</td>
+                            <td>{{user.u_user_name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td>{{user.u_email}}</td>
+                        </tr>
+                        <tr>
+                            <td>Mobile Phone:</td>
+                            <td>{{user.u_mobile_phone}}</td>
+                        </tr>
+                        <tr>
+                            <td>Office Phone:</td>
+                            <td>{{user.u_office_phone}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </ut-edit-module>
+            <ut-edit-module title="Attachments">
+                <ut-attachment-module
+                    o="User"
+                    oid="user.u_id"
+                >
+                </ut-attachment-module>
+            </ut-edit-module>
+
+            <ut-edit-module title="Activity">
+                <ut-activity-module
+                    o="User"
+                    oid="user.u_id"
+                    comment="comment"
+                >
+                </ut-activity-module>
+            </ut-edit-module>
+        </div>
+    </div>
+</div>

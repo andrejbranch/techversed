@@ -1,0 +1,31 @@
+<div id="targets-filter-container" ng-controller="CollaboratorsFilterController">
+    <ul class="filters-users-list">
+        <li>
+            <input class="init-focus" ng-model="search" type="text" placeholder="Find Collaborators..."></input>
+        </li>
+        <ul class="selected" ng-if="filteredCollaborators.length">
+            <li ng-repeat="filteredCollaborator in filteredCollaborators">
+                <label>
+                    <input
+                        ng-model="c"
+                        ng-checked="true"
+                        ng-change="toggleCollaborator('remove', filteredCollaborator)"
+                        type="checkbox"
+                    />
+                    <div class="description">{{filteredCollaborator.groupName}}</div>
+                </label>
+            </li>
+        </ul>
+        <li ng-repeat="collaborator in collaborators | filter:search | orderBy:'groupName'">
+            <label>
+                <input
+                    ng-model="c"
+                    ng-change="toggleCollaborator('append', collaborator)"
+                    type="checkbox"
+                />
+                <div class="description">{{collaborator.groupName}}</div>
+            </label>
+        </li>
+        <li class="help">Start typing for Collaborators</li>
+    </ul>
+</div>

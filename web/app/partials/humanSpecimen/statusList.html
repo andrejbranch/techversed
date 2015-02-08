@@ -1,0 +1,25 @@
+<div id="ut-detail-table" ng-controller="HumanSpecimenStatusListController">
+    <table>
+        <thead>
+            <th>Date Updated</th>
+            <th>Status</th>
+            <th>User</th>
+            <th>Notes</th>
+            <th></th>
+        </thead>
+        <tr ng-repeat="humanSpecimenStatus in humanSpecimenStatuses">
+            <td>{{humanSpecimenStatus.date}}</td>
+            <td>{{humanSpecimenStatus.HumanSpecimenStatusDetail.status}}</td>
+            <td>{{humanSpecimenStatus.User.fullName}}</td>
+            <td>{{humanSpecimenStatus.notes}}</td>
+            <td class="ut-actions-td">
+                <div class="ut-table-edit-delete-icons" ng-click="edit(humanSpecimenStatus)">
+                    <i class="icon-pencil"></i>
+                </div>
+                <div class="ut-table-edit-delete-icons" ng-click="delete(humanSpecimenStatus)">
+                    <i class="icon-trash"></i>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

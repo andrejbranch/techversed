@@ -1,0 +1,77 @@
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_top.html'"></div>
+<div id="ut-grid-table-container">
+    <table ng-if="labCores[0].gridParams.total">
+        <thead>
+            <tr>
+                <th ut-grid-header sort-field="id" label="Id"></th>
+                <th
+                    ut-grid-header
+                    label="Slug"
+                    ng-show="showColumns.indexOf('slug') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Name"
+                    ng-show="showColumns.indexOf('name') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Mission"
+                    ng-show="showColumns.indexOf('mission') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Website"
+                    ng-show="showColumns.indexOf('website') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="labCore in labCores" class="ut-fade">
+                <td ui-sref="vvcLabCore({labCoreId:labCore.id})" class="link">{{labCore.id}}</td>
+                <td
+                    ng-show="showColumns.indexOf('slug') > -1"
+                >
+                    {{labCore.slug}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('name') > -1"
+                >
+                    {{labCore.name}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('mission') > -1"
+                >
+                    {{labCore.mission | truncate: 250 }}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('website') > -1"
+                >
+                    {{labCore.website}}
+                </td>
+                <td class="actions">
+                    <ut-dropdown
+                        icon="icon-cog"
+                        template="/app/partials/labCore/grid_actions.html"
+                        data="labCore"
+                    >
+                    </ut-dropdown>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div ng-if="!labCores[0].gridParams.total" class="no-results">
+        No Results Found
+    </div>
+</div>
+
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_bottom.html'"></div>

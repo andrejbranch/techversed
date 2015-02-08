@@ -1,0 +1,104 @@
+<div id="antibody-request-create-form">
+    <div class="header">
+        <ul class="ut-breadcrumbs">
+            <li ui-sref="gocore">GoCore</li>
+            <li class="end" ui-sref="dnaPurificationGrid.search">DNA Purifications</li>
+            <li class="title">DNA Purification Create </li>
+        </ul>
+    </div>
+    <div class="select-rows">
+        <a>
+            Select how many DNA Purifications you are making.
+        </a>
+        <select ng-model="formModel.selectedNumber">
+            <option ng-repeat="number in numbers" value="{{number}}">{{number}}</option>
+        </select>
+    </div>
+    <form >
+        <ut-control-group>
+            <div ng-repeat="globalError in model.globalErrors" class="ut-global-error">
+                {{globalError}}
+            </div>
+        </ut-control-group>
+        <table class="ab-request-table">
+            <thead>
+                <tr class="ut-label horizontal-input-head">
+                    <th class="horizontal-control-label">
+                        Sample
+                        <span class='horizontal-required-control'>*</span>
+                        <span class="icon-chevron-down form-chevron" ng-click="cascadeSample()"></span>
+                    </th>
+                    <th>
+                        Antibody Chain
+                        <span class="icon-chevron-down form-chevron" ng-click="cascadeChain()"></span>
+                    </th>
+                    <th class="horizontal-control-label">
+                        Culture Volume (mL)
+                        <span class='horizontal-required-control'>*</span>
+                        <span class="icon-chevron-down form-chevron" ng-click="cascadeCultureVolume()"></span>
+                    </th>
+                    <th class="horizontal-control-label">
+                        Elution Buffer
+                        <span class='horizontal-required-control'>*</span>
+                        <span class="icon-chevron-down form-chevron" ng-click="cascadeElutionBuffer()"></span>
+                    </th>
+                    <th>
+                        Comments
+                        <span class="icon-chevron-down form-chevron" ng-click="cascadeComment()"></span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="ab-request-table-body">
+                <tr ng-repeat="model in models">
+                    <div class="space-small">
+                        <td class="ab-request-td">
+                            <ut-typeahead
+                                model="model.Sample"
+                                key="model.sampleId"
+                                resource="sample-typeahead"
+                                placeholder="description"
+                                error="model.errors.sampleId"
+                            >
+                            </ut-typeahead>
+                        </td>
+                        <td class="ab-request-td">
+                            <select ng-model="model.chain">
+                                <option value="HC">HC</option>
+                                <option value="Fab">Fab</option>
+                                <option value="LC">LC</option>
+                                <option value="protein">protein</option>
+                            </select>
+                            <div ng-if="model.errors.chain" class="ut-global-error">{{model.errors.chain}}</div>
+                        </td>
+                        <td class="ab-request-td">
+                            <ut-input
+                                model="model.cultureVolume"
+                                error="model.errors.cultureVolume"
+                            >
+                            </ut-input>
+                        </td>
+                        <td class="ab-request-td">
+                            <select ng-model="model.elutionBuffer">
+                                <option value="Water">Water</option>
+                                <option value="TE">TE</option>
+                                <option value="EB">EB</option>
+                            </select>
+                            <div ng-if="model.errors.elutionBuffer" class="ut-global-error">{{model.errors.elutionBuffer}}</div>
+                        </td>
+                        <td class="ab-request-td">
+                            <ut-input
+                                model="model.comments"
+                                error="model.errors.comments"
+                            >
+                            </ut-input>
+                        </td>
+                    </div>
+                </tr>
+            </tbody>
+        </table>
+        <div class="ab-request-foot">
+            <button class="btn" ng-click="cancel()">Cancel</button>
+            <button class="btn btn-primary" ng-click="save()">Submit Requests</button>
+        </div>
+    </form>
+</div>

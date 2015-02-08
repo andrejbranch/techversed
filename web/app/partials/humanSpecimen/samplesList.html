@@ -1,0 +1,32 @@
+<div id="ut-detail-table" ng-controller="HumanSpecimenSampleListController">
+    <div class="ut-relative-plus-icon" ng-click="create()">
+        <i class="icon-plus"></i>
+    </div>
+    <table ng-show="humanSpecimenSamples.length">
+        <thead>
+            <tr>
+                <th ut-grid-header sort-field="id" label="Id"></th>
+                <th>User</th>
+                <th>Description</th>
+                <th>Created At</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="humanSpecimenSample in humanSpecimenSamples">
+                <td ui-sref="sample({sampleId:humanSpecimenSample.sampleId})" class="link">{{humanSpecimenSample.sampleId}}</td>
+                <td>{{humanSpecimenSample.Sample.User.fullName}}</td>
+                <td> {{humanSpecimenSample.Sample.description}} </td>
+                <td> {{humanSpecimenSample.Sample.created_at | utDate | date:'MM/dd/yy @ h:mma'}} </td>
+                <td class="ut-actions-td">
+                    <div class="ut-table-edit-delete-icons">
+                        <i class="icon-pencil" ng-click="edit(humanSpecimenSample.sampleId)"></i>
+                    </div>
+                    <div class="ut-table-edit-delete-icons" ng-click="delete(humanSpecimenSample)">
+                        <i class="icon-trash"></i>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

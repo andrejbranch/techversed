@@ -1,0 +1,106 @@
+<div class="modal-header">
+    <h3 ng-if="!box.id">Create Box in division {{box.divisionId}}</h3>
+    <h3 ng-if="box.id">Edit Box {{box.id}}</h3>
+</div>
+<div class="modal-body" ut-modal-body>
+    <form id="box-form-container" class="form-horizontal">
+        <div class="space-medium">
+
+            <ut-control-group>
+                <div ng-repeat="globalError in box.globalErrors" class="ut-global-error">
+                    {{globalError}}
+                </div>
+            </ut-control-group>
+
+            <ut-control-group label="Name">
+                <ut-input
+                    model="box.name"
+                    error="box.errors.name"
+                >
+                </ut-input>
+            </ut-control-group>
+            <ut-control-group label="Height">
+                <select ng-model="box.height" class="input-small" ng-if="canModifyDimensions()">
+                    <option ng-repeat="i in getHeights()" value="{{i}}">{{i}}</option>
+                </select>
+                <ut-input
+                    model="box.height"
+                    disabled="true"
+                    ng-if="!canModifyDimensions()"
+                >
+                </ut-input>
+                <div ng-if="box.errors.height" class="ut-global-error">{{box.errors.height}}</div>
+            </ut-control-group>
+
+            <ut-control-group label="Width">
+                <select ng-model="box.width" class="input-small" ng-if="canModifyDimensions()">
+                    <option ng-repeat="i in getHeights()" value="{{i}}">{{i}}</option>
+                </select>
+                <ut-input
+                    model="box.width"
+                    disabled="true"
+                    ng-if="!canModifyDimensions()"
+                >
+                </ut-input>
+                <div ng-if="box.errors.width" class="ut-global-error">{{box.errors.height}}</div>
+            </ut-control-group>
+
+            <ut-control-group label="Inventory Description">
+                <textarea type="text" ng-model="box.description" class="span5 ut-typeahead" />
+            </ut-control-group>
+
+            <ut-control-group label="Editable By">
+                <ut-typeahead
+                    model="user"
+                    resource="user"
+                    callback="addEditableByUser"
+                    placeholder="fullName"
+                    hint="Search for users to add .."
+                >
+                </ut-typeahead>
+                <table id="box-editable-by-table">
+                    <tr ng-repeat="userThatCanEdit in box.usersThatCanEdit">
+                        <td class="image inline">
+                            <div class="img-avatar inline">
+                                <img ng-src="/profile/avatar/{{userThatCanEdit.u_id}}" />
+                            </div>
+                        </td>
+                        <td class="content">
+                            {{userThatCanEdit.fullName}}
+                        </td>
+                        <td class="remove">
+                            <a ng-click="removeUserThatCanEdit($index, userThatCanEdit.u_id)" class="ut-icon-minus"></a>
+                        </td>
+                    </tr>
+                </table>
+            </ut-control-group>
+            <ut-control-group label="Awaiting Permission">
+                    <table id="box-awaiting-table">
+                        <tr ng-repeat="awaitingUser in box.awaitingUsers">
+                            <td class="image">
+                                <div class="img-avatar inline">
+                                    <img ng-src="/profile/avatar/{{awaitingUser.u_id}}" />
+                                </div>
+                            </td>
+                            <td class="content">
+                                {{awaitingUser.fullName}}
+                            </td>
+                            <td class="grant">
+                                <button ng-click="grantUserPermission($index, awaitingUser)" class="btn btn-success">Grant</button>
+                            </td>
+                            <td class="deny">
+                                <button ng-click="denyUserPermission($index, awaitingUser.u_id)" class="btn btn-danger">Deny</button>
+                            </td>
+                        </tr>
+                    </table>
+                </ut-control-group>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="box.id">Save</a>
+        <a ng-if="!box.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

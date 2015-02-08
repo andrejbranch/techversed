@@ -1,0 +1,94 @@
+<div class="modal-header">
+    <h3 ng-if="!preset.id">Create Preset</h3>
+    <h3 ng-if="preset.id">Edit Preset {{ preset.id }} - {{ preset.name }}</h3>
+</div>
+<div class="ut-form-body">
+    <div class="modal-body" ut-modal-body>
+        <form id="sample-modal-form" class="form-horizontal">
+            <div class="space-medium">
+
+                <ut-control-group>
+                    <div ng-repeat="globalError in preset.globalErrors" class="ut-global-error">
+                        {{globalError}}
+                    </div>
+                </ut-control-group>
+
+                <ut-control-group label="Name" required>
+                    <ut-input
+                        model="preset.name"
+                        error="preset.errors.name"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+               <ut-control-group label="Sample Type">
+                    <ut-typeahead
+                        model="preset.SampleType"
+                        key="preset.sample_type_id"
+                        placeholder="name"
+                        resource="sample-type-typeahead"
+                        error="preset.errors.sample_type_id"
+                    >
+                    </ut-typeahead>
+                </ut-control-group>
+
+               <ut-control-group label="Molecule">
+                    <ut-typeahead
+                        model="preset.Molecule"
+                        key="preset.molecule_id"
+                        placeholder="name"
+                        resource="molecule-typeahead"
+                        error="preset.errors.sample_type_id"
+                    >
+                    </ut-typeahead>
+                </ut-control-group>
+
+                <ut-control-group label="Tag">
+                    <ut-typeahead
+                        model="preset.Tag"
+                        key="preset.tag_id"
+                        placeholder="name"
+                        resource="tag-typeahead"
+                        error="preset.errors.tag_id"
+                    >
+                    </ut-typeahead>
+                </ut-control-group>
+
+                <ut-control-group label="Parent">
+                    <ut-typeahead
+                        model="preset.Parent"
+                        key="preset.parent_id"
+                        placeholder="description"
+                        resource="sample-typeahead"
+                        error="preset.errors.parent_id"
+                    >
+                    </ut-typeahead>
+                </ut-control-group>
+
+                <ut-control-group label="Target">
+                    <ut-typeahead
+                        model="preset.Target"
+                        key="preset.target_id"
+                        placeholder="name"
+                        resource="target-typeahead"
+                        error="preset.errors.target_id"
+                    >
+                    </ut-typeahead>
+                </ut-control-group>
+
+                <div class="ut-form-divider"></div>
+
+                <ut-control-group label="Attachments">
+                    <ut-attachment-uploader o="Preset" oid="preset.id" trigger="handleUpload"></ut-attachment-uploader>
+                </ut-control-group>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="preset.id">Save</a>
+        <a ng-if="!preset.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

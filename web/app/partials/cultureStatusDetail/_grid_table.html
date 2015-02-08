@@ -1,0 +1,65 @@
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_top.html'"></div>
+
+<div id="ut-grid-table-container">
+    <table id="antibody-request-table" ng-if="cultureStatusDetails[0].gridParams.total">
+        <thead>
+            <tr>
+                <th
+                    ut-grid-header
+                    label="Sort Order"
+                    ng-show="showColumns.indexOf('sort') > -1"
+                    sort-field="sort"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Culture Status Detail Name"
+                    ng-show="showColumns.indexOf('name') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Color"
+                    ng-show="showColumns.indexOf('color') > -1"
+                    sort-field="color"
+                >
+                </th>
+                <th class="actions"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="cultureStatusDetail in cultureStatusDetails" class="ut-fade">
+                <td
+                    ui-sref="cultureStatusDetail({cultureStatusDetailId:cultureStatusDetail.id})" class="link"
+                    ng-show="showColumns.indexOf('sort') > -1"
+                >
+                    {{cultureStatusDetail.sort}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('name') > -1"
+                >
+                    {{cultureStatusDetail.name}}
+                </td>
+                <td
+                    class="culture-status-{{cultureStatusDetail.color}}"
+                    ng-show="showColumns.indexOf('color') > -1"
+                >
+                </td>
+                <td class="actions">
+                    <ut-dropdown
+                        icon="icon-cog"
+                        template="/app/partials/cultureStatusDetail/grid_actions.html"
+                        data="cultureStatusDetail"
+                    >
+                    </ut-dropdown>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div ng-if="!cultureStatusDetails[0].gridParams.total" class="no-results">
+        No Results Found
+    </div>
+</div>
+
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_bottom.html'"></div>

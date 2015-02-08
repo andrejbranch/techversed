@@ -1,0 +1,108 @@
+<div id="antibody-request-create-form">
+    <div class="header">
+        <ul class="ut-breadcrumbs">
+            <li ui-sref="gocore">GoCore</li>
+            <li class="end" ui-sref="antibodyRequestGrid.search">Antibody Requests</li>
+            <li class="title">Antibody Request Create </li>
+        </ul>
+    </div>
+    <div class="select-rows">
+        <a>
+            Select how many mAb Requests you are making.
+        </a>
+        <select ng-model="formModel.selectedNumber">
+            <option ng-repeat="number in numbers" value="{{number}}">{{number}}</option>
+        </select>
+    </div>
+    <form >
+        <ut-control-group>
+            <div ng-repeat="globalError in model.globalErrors" class="ut-global-error">
+                {{globalError}}
+            </div>
+        </ut-control-group>
+        <table class="ab-request-table">
+            <thead>
+                <tr class="ut-label horizontal-input-head">
+                    <th class="horizontal-control-label">
+                        Contact
+                        <span class='horizontal-required-control'>*</span>
+                    </th>
+                    <th class="horizontal-control-label">
+                        Sample
+                        <span class='horizontal-required-control'>*</span>
+                    </th>
+                    <th class="horizontal-control-label">
+                        Target
+                        <span class='horizontal-required-control'>*</span>
+                    </th>
+                    <th>Amount Requested (mg)</th>
+                    <th>Form Requested (IgG or Fab)</th>
+                    <th>Date Needed By</th>
+                </tr>
+            </thead>
+            <tbody class="ab-request-table-body">
+                <tr ng-repeat="model in models">
+                    <div class="space-small">
+                        <td class="ab-request-td">
+                            <ut-typeahead
+                                model="model.Contact"
+                                key="model.contactId"
+                                resource="contact"
+                                placeholder="name"
+                                error="model.errors.contactId"
+                            >
+                            </ut-typeahead>
+                        </td>
+                        <td class="ab-request-td">
+                            <ut-typeahead
+                                model="model.Sample"
+                                key="model.sampleId"
+                                resource="sample-typeahead"
+                                placeholder="description"
+                                error="model.errors.sampleId"
+                            >
+                            </ut-typeahead>
+                        </td>
+                        <td class="ab-request-td">
+                            <ut-typeahead
+                                model="model.Target"
+                                key="model.targetId"
+                                resource="target-typeahead"
+                                placeholder="name"
+                                error="model.errors.targetId"
+                            >
+                            </ut-typeahead>
+                         </td>
+                        <td class="ab-request-td">
+                            <ut-input
+                                model="model.amountRequested"
+                                error="model.errors.amountRequested"
+                            >
+                            </ut-input>
+                        </td class="ab-request-td">
+                        <td class="ab-request-td">
+                            <select ng-model="model.formRequested">
+                                <option value="IgG">IgG</option>
+                                <option value="Fab">Fab</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <div ng-if="model.errors.formRequested" class="ut-global-error">{{model.errors.formRequested}}</div>
+                        </td>
+                        <td class="ab-request-td">
+                            <input
+                                type="text"
+                                datepicker-popup="M/dd/yyyy"
+                                ng-model="model.dateNeededBy"
+                                class="ut-input"
+                            />
+                        </td>
+                    </div>
+                </tr>
+            </tbody>
+        </table>
+        <div class="ab-request-foot">
+            <button class="btn" ng-click="cancel()">Cancel</button>
+            <button class="btn btn-primary" ng-click="save()">Submit Requests</button>
+        </div>
+    </form>
+</div>

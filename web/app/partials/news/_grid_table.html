@@ -1,0 +1,92 @@
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_top.html'"></div>
+<div id="ut-grid-table-container" class="news-grid">
+    <table ng-if="news[0].gridParams.total">
+        <thead>
+            <tr>
+                <th ut-grid-header sort-field="id" label="Id"></th>
+                <th
+                    ut-grid-header
+                    label="Title"
+                    ng-show="showColumns.indexOf('title') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Content"
+                    ng-show="showColumns.indexOf('content') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Lab Core"
+                    ng-show="showColumns.indexOf('lab_core') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Date"
+                    ng-show="showColumns.indexOf('date') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Published"
+                    ng-show="showColumns.indexOf('published') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="news in news" class="ut-fade">
+                <td ui-sref="news({newsId:news.id})" class="link">{{news.id}}</td>
+                <td
+                    ng-show="showColumns.indexOf('title') > -1"
+                >
+                    {{news.title | truncate:70 }}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('content') > -1"
+                >
+                    {{news.content | truncate:130 }}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('lab_core') > -1"
+                >
+                    {{news.LabCore.name}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('date') > -1"
+                >
+                    {{news.date}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('published') > -1"
+                >
+                    <a class="confirmed-icons">
+                        <img ng-if="news.published" ng-src="/images/utilities/inventory/green-checkmark.png" />
+                        <img ng-if="!news.published" ng-src="/images/utilities/inventory/red-x.png" />
+                    </a>
+                </td>
+                <td class="actions">
+                    <ut-dropdown
+                        icon="icon-cog"
+                        template="/app/partials/news/grid_actions.html"
+                        data="news"
+                    >
+                    </ut-dropdown>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div ng-if="!news[0].gridParams.total" class="no-results">
+        No Results Found
+    </div>
+</div>
+
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_bottom.html'"></div>

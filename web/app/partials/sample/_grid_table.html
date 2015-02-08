@@ -1,0 +1,198 @@
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_top.html'"></div>
+
+<div id="ut-grid-table-container">
+    <table ng-if="samples[0].gridParams.total">
+        <thead>
+            <tr>
+                <th ut-grid-header sort-field="id" label="Id"></th>
+                <th
+                    ut-grid-header
+                    sort-field="description"
+                    label="Description"
+                    ng-show="showColumns.indexOf('description') > -1"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="u.u_first_name"
+                    label="User"
+                    ng-show="showColumns.indexOf('userFullName') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="date"
+                    label="Date"
+                    ng-show="showColumns.indexOf('date') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="aliases"
+                    label="Aliases"
+                    ng-show="showColumns.indexOf('aliases') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="d.aliases"
+                    label="Donor"
+                    ng-show="showColumns.indexOf('donorAliases') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="p.description"
+                    label="Protocol"
+                    ng-show="showColumns.indexOf('protocolName') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="st.name"
+                    label="Sample Type"
+                    ng-show="showColumns.indexOf('sampleTypeName') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="m.name"
+                    label="Molecule"
+                    ng-show="showColumns.indexOf('moleculeName') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="tg.name"
+                    label="Tag"
+                    ng-show="showColumns.indexOf('tagName') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="pt.description"
+                    label="Parent"
+                    ng-show="showColumns.indexOf('parentDescription') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="trg.name"
+                    label="Target"
+                    ng-show="showColumns.indexOf('targetName') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="created_at"
+                    label="Created At"
+                    ng-show="showColumns.indexOf('created_at') > -1"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="updated_at"
+                    label="Updated At"
+                    ng-show="showColumns.indexOf('updated_at') > -1"
+                >
+                </th>
+                <th class="actions"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="sample in samples" class="ut-fade">
+                <td ui-sref="sample({sampleId:sample.id})" class="link">{{sample.id}}</td>
+                <td
+                    ui-sref="sample({sampleId:sample.id})"
+                    class="link"
+                    ng-show="showColumns.indexOf('description') > -1"
+                >
+                    {{sample.description}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('userFullName') > -1"
+                >
+                    {{sample.userFullName}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('date') > -1"
+                >
+                    {{sample.date | date:'MM/dd/yy'}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('aliases') > -1"
+                >
+                    {{sample.aliases}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('donorAliases') > -1"
+                >
+                    <a class="flat-link" ui-sref="donor({donorId:sample.donor_id})">{{sample.donorAliases | truncate:40}}</a>
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('protocolName') > -1"
+                >
+                    <a class="flat-link" ng-href="/protocol/{{sample.protocol_id}}">{{sample.protocolName}}</a>
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('sampleTypeName') > -1"
+                >
+                    <a ui-sref="sampleType({sampleTypeId:sample.sample_type_id})" class="flat-link" class="ut-link-cursor">{{sample.sampleTypeName}}</a>
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('moleculeName') > -1"
+                >
+                    <a ui-sref="molecule({moleculeId:sample.molecule_id})" class="flat-link">{{sample.moleculeName}}</a>
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('tagName') > -1"
+                >
+                    <a ui-sref="tag({tagId:sample.tag_id})" class="flat-link" class="ut-link-cursor">{{sample.tagName}}</a>
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('parentDescription') > -1"
+                >
+                    <a class="flat-link" ui-sref="sample({sampleId:sample.parent_id})">{{sample.parentDescription}}</a>
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('targetName') > -1"
+                >
+                    <a ui-sref="target({targetId:sample.target_id})" class="flat-link">{{sample.targetName}}</a>
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('created_at') > -1"
+                >
+                    {{sample.created_at | utDate | date:'MM/dd/yy @ h:mma'}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('updated_at') > -1"
+                >
+                    {{sample.updated_at | utDate | date:'MM/dd/yy @ h:mma'}}
+                </td>
+                <td class="actions">
+                    <ut-dropdown
+                        icon="icon-cog"
+                        template="/app/partials/sample/grid_actions.html"
+                        data="sample"
+                    >
+                    </ut-dropdown>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div ng-if="!samples[0].gridParams.total" class="no-results">
+        No Results Found
+    </div>
+</div>
+
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_bottom.html'"></div>

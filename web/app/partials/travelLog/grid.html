@@ -1,0 +1,37 @@
+<div id="ut-grid-container">
+    <div class="header">
+        <div class="header-section">
+            <div class="operations">
+                <ut-dropdown
+                    icon="operations-icon-export"
+                    title="Export"
+                    template="/app/partials/travelLog/csv_export.html"
+                >
+                </ut-dropdown>
+            </div>
+            <div class="operations">
+                <ut-dropdown
+                    icon="operations-icon-share"
+                    title="Share"
+                    template="/app/partials/grid/share.html"
+                >
+                </ut-dropdown>
+            </div>
+            <div class="header-primary">
+                <h3>Travel Log Search</h3>
+                <button class="btn" ng-click="createTravelLog()" ng-if="canCreate()">Create Travel Log</button>
+            </div>
+        </div>
+    </div>
+    <div class="filters-container">
+        <div class="filters">
+            <ut-dropdown
+                title="Users: All"
+                template="/app/partials/filters/users.html"
+            >
+            </ut-dropdown>
+            <ut-contains-text></ut-contains-text>
+        </div>
+    </div>
+    <div ui-view class="ut-fade"></div>
+</div>

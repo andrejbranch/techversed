@@ -1,0 +1,99 @@
+<div class="modal-header">
+    <h3 >Edit Antibody Request {{antibodyRequest.id}} - {{antibodyRequest.Sample.description}}</h3>
+</div>
+<div class="modal-body" ut-modal-body>
+    <form id="sample-modal-form" class="form-horizontal">
+        <div class="space-medium">
+
+            <ut-control-group>
+                <div ng-repeat="globalError in antibodyRequest.globalErrors" class="ut-global-error">
+                    {{globalError}}
+                </div>
+            </ut-control-group>
+
+            <ut-control-group label="Contact" required>
+                <ut-typeahead
+                    model="antibodyRequest.Contact"
+                    key="antibodyRequest.contactId"
+                    resource="contact"
+                    placeholder="name"
+                    error="antibodyRequest.errors.contactId"
+                >
+                </ut-typeahead>
+            </ut-control-group>
+
+            <ut-control-group label="Sample" required>
+                <ut-typeahead
+                    model="antibodyRequest.Sample"
+                    key="antibodyRequest.sampleId"
+                    resource="sample-typeahead"
+                    placeholder="description"
+                    error="antibodyRequest.errors.sampleId"
+                >
+                </ut-typeahead>
+            </ut-control-group>
+
+            <ut-control-group label="Target" required>
+                <ut-typeahead
+                    model="antibodyRequest.Target"
+                    key="antibodyRequest.targetId"
+                    resource="target-typeahead"
+                    placeholder="name"
+                    error="antibodyRequest.errors.targetId"
+                >
+                </ut-typeahead>
+            </ut-control-group>
+
+            <ut-control-group label="Amount Requested (mg)">
+                <ut-input
+                    model="antibodyRequest.amountRequested"
+                    error="antibodyRequest.errors.amountRequested"
+                >
+                </ut-input>
+            </ut-control-group>
+
+            <ut-control-group label="Form Requested">
+                <select ng-model="antibodyRequest.formRequested">
+                    <option value="IgG">IgG</option>
+                    <option value="Fab">Fab</option>
+                    <option value="Other">Other</option>
+                </select>
+                <div ng-if="antibodyRequest.errors.formRequested" class="ut-global-error">{{antibodyRequest.errors.formRequested}}</div>
+            </ut-control-group>
+
+            <ut-control-group label="Date Needed By">
+                <input
+                    type="text"
+                    datepicker-popup="M/dd/yyyy"
+                    ng-model="antibodyRequest.dateNeededBy"
+                    class="ut-input"
+                />
+            </ut-control-group>
+
+            <ut-control-group label="VIM Sents" class="ut-many-input-max-width">
+                <ut-one-to-many
+                    resource="vim-sent"
+                    model="antibodyRequest"
+                    foreign-key="vimSentId"
+                    relation="AntibodyRequestRelations"
+                    access="antibodyRequest.vimSents"
+                    placeholder="placeholder"
+                />
+                </ut-one-to-many>
+            </ut-control-group>
+
+            <div class="ut-form-divider"></div>
+
+            <ut-control-group label="Attachments">
+                <ut-attachment-uploader o="AntibodyRequest" oid="antibodyRequest.id" trigger="handleUpload"></ut-attachment-uploader>
+            </ut-control-group>
+
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a>Save</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

@@ -1,0 +1,173 @@
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_top.html'"></div>
+
+<div id="ut-grid-table-container">
+    <table id="antibody-request-table" ng-if="antibodyRequests[0].gridParams.total">
+        <thead>
+            <tr>
+                <th ut-grid-header sort-field="id" label="Id"></th>
+                <th
+                    ut-grid-header
+                    label="Contact"
+                    sort-field="con.name"
+                    ng-show="showColumns.indexOf('contactId') > -1"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="u.u_first_name"
+                    label="User"
+                    ng-show="showColumns.indexOf('userId') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Sample (mAb)"
+                    sort-field="s.description"
+                    ng-show="showColumns.indexOf('sampleId') > -1"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Target"
+                    ng-show="showColumns.indexOf('targetId') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Amount Requested (mg)"
+                    ng-show="showColumns.indexOf('amountRequested') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Form Requested"
+                    ng-show="showColumns.indexOf('formRequested') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Date Needed By"
+                    sort-field="dateNeededBy"
+                    ng-show="showColumns.indexOf('dateNeededBy') > -1"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Vim Sents"
+                    ng-show="showColumns.indexOf('vimSents') > -1"
+                    sort-field="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="created_at"
+                    label="Created At"
+                    ng-show="showColumns.indexOf('created_at') > -1"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="updated_at"
+                    label="Updated At"
+                    ng-show="showColumns.indexOf('updated_at') > -1"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Culture Status"
+                    ng-show="showColumns.indexOf('cultureId') > -1"
+                >
+                </th>
+                <th class="actions" ng-if="canEdit()"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="antibodyRequest in antibodyRequests" class="ut-fade">
+                <td ui-sref="antibodyRequest({antibodyRequestId:antibodyRequest.id})" class="link">{{antibodyRequest.id}}</td>
+                <td
+                    ng-show="showColumns.indexOf('contactId') > -1"
+                >
+                    <a class="flat-link" ui-sref="contact({contactId:antibodyRequest.Contact.id})">{{antibodyRequest.Contact.name}}</a>
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('userId') > -1"
+                >
+                    {{antibodyRequest.User.fullName}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('sampleId') > -1"
+                >
+                    <a ui-sref="sample({sampleId:antibodyRequest.Sample.id})" class="link">{{antibodyRequest.Sample.description}}</a>
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('targetId') > -1"
+                >
+                    {{antibodyRequest.Target.name}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('amountRequested') > -1"
+                >
+                    {{antibodyRequest.amountRequested}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('formRequested') > -1"
+                >
+                    {{antibodyRequest.formRequested}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('dateNeededBy') > -1"
+                >
+                    {{antibodyRequest.dateNeededBy | date:'MM/dd/yy'}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('vimSents') > -1"
+                >
+                    <ul>
+                        <li ng-repeat="vimSent in antibodyRequest.vimSents">
+                            <a ng-if="!$last" ng-href="/vim/sent/{{vimSent.id}}" class="flat-link">
+                                {{vimSent.placeholder + ",&nbsp;"}}
+                            </a>
+                            <a ng-if="$last" ng-href="/vim/sent/{{vimSent.id}}" class="flat-link">
+                                {{vimSent.placeholder}}
+                            </a>
+                        </li>
+                    </ul>
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('created_at') > -1"
+                >
+                    {{antibodyRequest.created_at | utDate | date:'MM/dd/yy'}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('updated_at') > -1"
+                >
+                    {{antibodyRequest.updated_at | utDate | date:'MM/dd/yy'}}
+                </td>
+                <td
+                    ng-class="getCultureStatusClass(antibodyRequest)"
+                    ng-show="showColumns.indexOf('cultureId') > -1"
+                >
+                    <a ng-if="hasCulture(antibodyRequest)">{{antibodyRequest.Culture.statusName}}</a>
+                    <a ng-if="!hasCulture(antibodyRequest)">Not in culture</a>
+                </td>
+                <td class="actions" ng-if="canEdit()">
+                    <ut-dropdown
+                        icon="icon-cog"
+                        template="/app/partials/antibodyRequest/grid_actions.html"
+                        data="antibodyRequest"
+                    >
+                    </ut-dropdown>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div ng-if="!antibodyRequests[0].gridParams.total" class="no-results">
+        No Results Found
+    </div>
+</div>
+
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_bottom.html'"></div>

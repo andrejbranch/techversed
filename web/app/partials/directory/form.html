@@ -1,0 +1,122 @@
+<div class="modal-header">
+    <h3 ng-if="user.u_id">Edit User {{ user.u_id }} - {{ user.fullName }}</h3>
+</div>
+<div class="ut-form-body">
+    <div class="modal-body" ut-modal-body>
+        <form id="sample-modal-form" class="form-horizontal">
+            <div class="space-medium">
+
+                <ut-control-group>
+                    <div ng-repeat="globalError in user.globalErrors" class="ut-global-error">
+                        {{globalError}}
+                    </div>
+                </ut-control-group>
+
+                <ut-control-group label="First Name" required>
+                    <ut-input
+                        model="user.u_first_name"
+                        error="user.errors.u_first_name"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Last Name" required>
+                    <ut-input
+                        model="user.u_last_name"
+                        error="user.errors.u_last_name"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Lab Core">
+                    <ut-typeahead
+                        model="user.labCore"
+                        key="user.lab_core"
+                        resource="lab-core-typeahead"
+                        placeholder="name"
+                        error="user.errors.lab_core"
+                    >
+                    </ut-typeahead>
+                </ut-control-group>
+
+                <ut-control-group label="User Name" required>
+                    <ut-input
+                        model="user.u_user_name"
+                        error="user.errors.u_user_name"
+                        disabled="true"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Email" required>
+                    <ut-input
+                        model="user.u_email"
+                        error="user.errors.u_email"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Office Phone">
+                    <ut-input
+                        model="user.u_office_phone"
+                        error="user.errors.u_office_phone"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Mobile Phone">
+                    <ut-input
+                        model="user.u_mobile_phone"
+                        error="user.errors.u_mobile_phone"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Room Number">
+                    <ut-input
+                        model="user.u_office_room"
+                        error="user.errors.u_office_room"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Degree" required>
+                    <ut-input
+                        model="user.u_degree"
+                        error="user.errors.u_degree"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Role" required>
+                    <ut-input
+                        model="user.u_role"
+                        error="user.errors.u_role"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Member Status" required>
+                    <select ng-model="user.u_lab_membership">
+                        <option value="None">None</option>
+                        <option value="Former">Former</option>
+                        <option value="Current">Current</option>
+                    </select>
+                    <div ng-if="user.errors.u_lab_membership" class="ut-global-error">{{user.errors.u_lab_membership}}</div>
+                </ut-control-group>
+
+                <div class="ut-form-divider"></div>
+
+                <ut-control-group label="Attachments">
+                    <ut-attachment-uploader o="User" oid="user.u_id" trigger="handleUpload"></ut-attachment-uploader>
+                </ut-control-group>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="user.u_id">Save</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

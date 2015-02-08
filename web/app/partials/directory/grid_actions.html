@@ -1,0 +1,6 @@
+<div id="ut-grid-actions" ng-controller="DirectoryGridActionsController">
+   <ul class="filters-users-list">
+        <li ui-sref="directory({userId:data.u_id})"><i class="icon-file" />View</li>
+        <li ng-if="canEdit()" ng-click="openEdit()"><i class="icon-pencil" />Edit</li>
+    </ul>
+</div>

@@ -1,0 +1,222 @@
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_top.html'"></div>
+
+<div id="ut-grid-table-container">
+    <table id="dna-purification-table" ng-if="dnaPurifications[0].gridParams.total">
+        <thead>
+            <tr>
+                <th ut-grid-header sort-field="id" label="Id"></th>
+                <th
+                    ut-grid-header
+                    sort-field="created_at"
+                    label="Date of Submission"
+                    ng-show="showColumns.indexOf('created_at') > -1"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="u.u_first_name"
+                    label="User"
+                    ng-show="showColumns.indexOf('userId') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Sample"
+                    ng-show="showColumns.indexOf('sampleId') > -1"
+                    allow-sort="true"
+                    sort-field="s.description"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Culture Volume"
+                    ng-show="showColumns.indexOf('cultureVolume') > -1"
+                    allow-sort="true"
+                    sort-field="cultureVolume"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Elution Volume"
+                    ng-show="showColumns.indexOf('elutionVolume') > -1"
+                    allow-sort="true"
+                    sort-field="elutionVolume"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Concentration (mg/mL)"
+                    ng-show="showColumns.indexOf('concentration') > -1"
+                    allow-sort="true"
+                    sort-field="concentration"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Yield (mg/mL)"
+                    ng-show="showColumns.indexOf('dnaYield') > -1"
+                    allow-sort="true"
+                    sort-field="dnaYield"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="chain"
+                    label="Chain"
+                    ng-show="showColumns.indexOf('chain') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="expectedDate"
+                    label="Expected Date"
+                    ng-show="showColumns.indexOf('expectedDate') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Status"
+                    ng-show="showColumns.indexOf('status') > -1"
+                    allow-sort="true"
+                    sort-field="status"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="completionDate"
+                    label="Completion Date"
+                    ng-show="showColumns.indexOf('completionDate') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Comments"
+                    ng-show="showColumns.indexOf('comments') > -1"
+                    allow-sort="true"
+                    sort-field="comments"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Notes"
+                    ng-show="showColumns.indexOf('notes') > -1"
+                    allow-sort="true"
+                    sort-field="notes"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="updated_at"
+                    label="Updated At"
+                    ng-show="showColumns.indexOf('updated_at') > -1"
+                >
+                </th>
+                <th class="actions" ng-if="canEdit()"></th>
+                <th class="actions" ng-if="canEdit()"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr
+                ng-repeat="dnaPurification in dnaPurifications" class="ut-fade"
+                ng-class="inCartClass(dnaPurification)"
+            >
+                <td ui-sref="dnaPurification({dnaPurificationId:dnaPurification.id})" class="link">{{dnaPurification.id}}</td>
+                <td
+                    ng-show="showColumns.indexOf('created_at') > -1"
+                >
+                    {{dnaPurification.created_at | utDate | date:'MM/dd/yy'}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('userId') > -1"
+                >
+                    {{dnaPurification.User.fullName}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('sampleId') > -1"
+                >
+                    <a class="flat-link" ui-sref="sample({sampleId:dnaPurification.Sample.id})">{{dnaPurification.Sample.description}}</a>
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('cultureVolume') > -1"
+                >
+                    {{dnaPurification.cultureVolume}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('elutionVolume') > -1"
+                >
+                    {{dnaPurification.elutionVolume}}
+                </td>
+
+                <td
+                    ng-show="showColumns.indexOf('concentration') > -1"
+                >
+                    {{dnaPurification.concentration}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('dnaYield') > -1"
+                >
+                    {{dnaPurification.dnaYield}}
+                </td>
+
+                <td
+                    ng-show="showColumns.indexOf('chain') > -1"
+                >
+                    {{dnaPurification.chain}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('expectedDate') > -1"
+                >
+                    {{dnaPurification.expectedDate | utDate | date:'MM/dd/yy'}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('status') > -1"
+                >
+                    {{dnaPurification.status}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('completionDate') > -1"
+                >
+                    {{dnaPurification.completionDate | utDate | date:'MM/dd/yy'}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('comments') > -1"
+                >
+                    {{dnaPurification.comments}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('notes') > -1"
+                >
+                    {{dnaPurification.notes}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('updated_at') > -1"
+                >
+                    {{dnaPurification.updated_at | utDate | date:'MM/dd/yy'}}
+                </td>
+                <td class="cart-icon">
+                    <span ng-if="!inCartClass(dnaPurification)" id="ut-cart-icon" ng-click="addToCart(dnaPurification)"></span>
+                    <span ng-if="inCartClass(dnaPurification)" class="ut-icon-minus" ng-click="removeFromCart(dnaPurification)"></span>
+                </td>
+                <td class="actions" ng-if="canEdit()">
+                    <ut-dropdown
+                        icon="icon-cog"
+                        template="/app/partials/dnaPurification/grid_actions.html"
+                        data="dnaPurification"
+                    >
+                    </ut-dropdown>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div ng-if="!dnaPurifications[0].gridParams.total" class="no-results">
+        No Results Found
+    </div>
+</div>
+
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_bottom.html'"></div>
+
+<div class="ut-fade" ng-include="'/app/partials/dnaPurification/_cart.html'"></div>

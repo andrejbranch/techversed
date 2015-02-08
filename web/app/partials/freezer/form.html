@@ -1,0 +1,103 @@
+<div class="modal-header">
+    <h3 ng-if="!freezer.id">Create Freezer</h3>
+    <h3 ng-if="freezer.id">Edit Freezer {{freezer.id}}</h3>
+</div>
+<div class="modal-body" ut-modal-body>
+    <form id="freezer-form-container" class="form-horizontal">
+        <div class="space-medium">
+
+            <ut-control-group>
+                <div ng-repeat="globalError in freezer.globalErrors" class="ut-global-error">
+                    {{globalError}}
+                </div>
+            </ut-control-group>
+
+            <ut-control-group label="Name">
+                <ut-input
+                    model="freezer.nickname"
+                    error="freezer.errors.nickname"
+                >
+                </ut-input>
+            </ut-control-group>
+
+           <ut-control-group label="Model">
+                <ut-input
+                    model="freezer.model"
+                    error="freezer.errors.model"
+                >
+                </ut-input>
+            </ut-control-group>
+
+           <ut-control-group label="Serial Number">
+                <ut-input
+                    model="freezer.serial"
+                    error="freezer.errors.serial"
+                >
+                </ut-input>
+            </ut-control-group>
+
+           <ut-control-group label="Purchase year">
+                <ut-input
+                    model="freezer.purchase_year"
+                    error="freezer.errors.purchase_year"
+                >
+                </ut-input>
+            </ut-control-group>
+
+           <ut-control-group label="Purchase cost">
+                <ut-input
+                    model="freezer.purchase_cost"
+                    error="freezer.errors.purchase_cost"
+                >
+                </ut-input>
+            </ut-control-group>
+
+            <ut-control-group label="Location">
+                <ut-input
+                    model="freezer.location"
+                    error="freezer.errors.location"
+                >
+                </ut-input>
+            </ut-control-group>
+
+            <ut-control-group label="PO">
+                <ut-input
+                    model="freezer.po"
+                    error="freezer.errors.po"
+                >
+                </ut-input>
+            </ut-control-group>
+
+            <ut-control-group label="Center">
+                <ut-input
+                    model="freezer.center"
+                    error="freezer.errors.center"
+                >
+                </ut-input>
+            </ut-control-group>
+
+            <ut-control-group label="Service">
+                <ut-input
+                    model="freezer.service"
+                    error="freezer.errors.service"
+                >
+                </ut-input>
+            </ut-control-group>
+
+            <ut-control-group label="Renewal">
+                <ut-input
+                    model="freezer.renewal"
+                    error="freezer.errors.renewal"
+                >
+                </ut-input>
+            </ut-control-group>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="freezer.id">Save</a>
+        <a ng-if="!freezer.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

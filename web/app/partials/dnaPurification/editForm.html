@@ -1,0 +1,136 @@
+<div class="modal-header">
+    <h3 >Edit DNA Purification {{dnaPurification.id}} - {{dnaPurification.Sample.description}}</h3>
+</div>
+<div class="modal-body" ut-modal-body>
+    <form id="sample-modal-form" class="form-horizontal">
+        <div class="space-medium">
+
+            <ut-control-group>
+                <div ng-repeat="globalError in dnaPurification.globalErrors" class="ut-global-error">
+                    {{globalError}}
+                </div>
+            </ut-control-group>
+
+            <ut-control-group label="User" required>
+                    <ut-typeahead
+                        model="dnaPurification.User"
+                        key="dnaPurification.userId"
+                        resource="user"
+                        resource-primary-key="u_id"
+                        placeholder="fullName"
+                        template-url="/app/partials/typeahead/user.html"
+                        disabled
+                        error="dnaPurification.errors.userId"
+                    </ut-typeahead>
+                </ut-control-group>
+
+            <ut-control-group label="Sample" required>
+                <ut-typeahead
+                    model="dnaPurification.Sample"
+                    key="dnaPurification.sampleId"
+                    resource="sample-typeahead"
+                    placeholder="description"
+                    error="dnaPurification.errors.sampleId"
+                >
+                </ut-typeahead>
+            </ut-control-group>
+
+            <ut-control-group label="Chain">
+                <select ng-model="dnaPurification.chain">
+                    <option value="HC">HC</option>
+                    <option value="Fab">Fab</option>
+                    <option value="LC">LC</option>
+                    <option value="protein">protein</option>
+                </select>
+                <div ng-if="dnaPurification.errors.chain" class="ut-global-error">{{dnaPurification.errors.chain}}</div>
+            </ut-control-group>
+
+            <ut-control-group label="Culture Volume (mL)" required>
+                <ut-input
+                    model="dnaPurification.cultureVolume"
+                    error="dnaPurification.errors.cultureVolume"
+                >
+                </ut-input>
+            </ut-control-group>
+
+            <ut-control-group label="Elution Buffer" required>
+                <select ng-model="dnaPurification.elutionBuffer">
+                    <option value="TE">TE</option>
+                    <option value="Water">Water</option>
+                    <option value="EB">EB</option>
+                </select>
+                <div ng-if="dnaPurification.errors.elutionBuffer" class="ut-global-error">{{dnaPurification.errors.elutionBuffer}}</div>
+            </ut-control-group>
+
+            <ut-control-group label="Elution Volume (μL)">
+                <ut-input
+                    model="dnaPurification.elutionVolume"
+                    error="dnaPurification.errors.elutionVolume"
+                >
+                </ut-input>
+            </ut-control-group>
+
+            <ut-control-group label="Expected Date" class="date-no-padding">
+                <input
+                    type="text"
+                    datepicker-popup="M/dd/yyyy"
+                    ng-model="dnaPurification.expectedDate"
+                    class="ut-input"
+                />
+            </ut-control-group>
+
+            <ut-control-group label="Completion Date" class="date-no-padding">
+                <input
+                    type="text"
+                    datepicker-popup="M/dd/yyyy"
+                    ng-model="dnaPurification.completionDate"
+                    class="ut-input"
+                />
+            </ut-control-group>
+
+            <ut-control-group label="Status">
+                <select ng-model="dnaPurification.status" disabled="true">
+                    <option value="review">review</option>
+                    <option value="processing">processing</option>
+                    <option value="finished">finished</option>
+                </select>
+                <div ng-if="dnaPurification.errors.status" class="ut-global-error">{{dnaPurification.errors.status}}</div>
+            </ut-control-group>
+
+            <ut-control-group label="Concentration">
+                <ut-input
+                    model="dnaPurification.concentration"
+                    error="dnaPurification.errors.concentration"
+                    disabled="true"
+                >
+                </ut-input>
+            </ut-control-group>
+
+            <ut-control-group label="DNA Yield">
+                <ut-input
+                    model="dnaPurification.dnaYield"
+                    error="dnaPurification.errors.dnaYield"
+                    disabled="true"
+                >
+                </ut-input>
+            </ut-control-group>
+
+            <div class="ut-form-divider"></div>
+
+            <ut-control-group>
+                (Not Nanodrop file)
+            </ut-control-group>
+
+            <ut-control-group label="Attachments">
+                <ut-attachment-uploader o="DnaPurification" oid="dnaPurification.id" trigger="handleUpload"></ut-attachment-uploader>
+            </ut-control-group>
+
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a>Save</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

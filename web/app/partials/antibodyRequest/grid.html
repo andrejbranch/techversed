@@ -1,0 +1,55 @@
+<div id="ut-grid-container">
+    <div class="header">
+        <div class="header-section">
+            <div class="operations">
+                <ut-dropdown
+                    icon="operations-icon-export"
+                    title="Export"
+                    template="/app/partials/antibodyRequest/csvExport.html"
+                >
+                </ut-dropdown>
+            </div>
+            <div class="operations">
+                <ut-dropdown
+                    icon="operations-icon-share"
+                    title="Share"
+                    template="/app/partials/grid/share.html"
+                >
+                </ut-dropdown>
+            </div>
+            <div class="header-primary">
+                <h3>Antibody Request Search</h3>
+                <button ng-if="canEdit()" class="btn" ng-click="createAntibodyRequest()">Create Antibody Request</button>
+            </div>
+        </div>
+    </div>
+    <div class="filters-container">
+        <div class="operations">
+            <button class="btn"><i class="icon-list"></i></button>
+        </div>
+        <div class="filters">
+            <ut-dropdown
+                title="Contact: All"
+                template="/app/partials/filters/contacts.html"
+            >
+            </ut-dropdown>
+            <ut-dropdown
+                title="Sample: All"
+                template="/app/partials/filters/samples.html"
+            >
+            </ut-dropdown>
+            <ut-dropdown
+                title="Target: All"
+                template="/app/partials/filters/targets.html"
+            >
+            </ut-dropdown>
+            <ut-dropdown
+                title="Created At: All"
+                template="/app/partials/filters/created_at.html"
+            >
+            </ut-dropdown>
+        </div>
+    </div>
+
+    <div ui-view class="ut-fade"></div>
+</div>

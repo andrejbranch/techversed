@@ -1,0 +1,52 @@
+<div class="modal-header">
+    <h3 ng-if="!cultureStatusDetail.id">Create Culture Status Detail</h3>
+    <h3 ng-if="cultureStatusDetail.id">Edit Culture Status Detail {{ cultureStatusDetail.id }} - {{ cultureStatusDetail.name }}</h3>
+</div>
+<div class="ut-form-body">
+    <div class="modal-body" ut-modal-body>
+        <form id="sample-modal-form" class="form-horizontal">
+            <div class="space-medium">
+
+                <ut-control-group>
+                    <div ng-repeat="globalError in cultureStatusDetail.globalErrors" class="ut-global-error">
+                        {{globalError}}
+                    </div>
+                </ut-control-group>
+
+                <ut-control-group label="Name:">
+                    <ut-input
+                        model="cultureStatusDetail.name"
+                        error="cultureStatusDetail.errors.name"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Sort Order:">
+                    <ut-input
+                        model="cultureStatusDetail.sort"
+                        error="cultureStatusDetail.errors.sort"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Status" required>
+                    <select ng-model="cultureStatusDetail.color">
+                        <option value="1">Red</option>
+                        <option value="2">Orange</option>
+                        <option value="3">Yellow</option>
+                        <option value="4">Light Green</option>
+                        <option value="5">Green</option>
+                    </select>
+                    <div ng-if="cultureStatusDetail.errors.color" class="ut-global-error">{{mta.errors.status}}</div>
+                </ut-control-group>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="cultureStatusDetail.id">Save</a>
+        <a ng-if="!cultureStatusDetail.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

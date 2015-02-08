@@ -1,0 +1,67 @@
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_top.html'"></div>
+<div id="ut-grid-table-container">
+    <table ng-if="collaborators[0].gridParams.total">
+        <thead>
+            <tr>
+                <th ut-grid-header sort-field="id" label="Id"></th>
+                <th
+                    ut-grid-header
+                    label="Group Name"
+                    ng-show="showColumns.indexOf('groupName') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Group Description"
+                    ng-show="showColumns.indexOf('description') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Location"
+                    ng-show="showColumns.indexOf('location') > -1"
+                >
+                </th>
+                </th>
+                <th class="actions"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="collaborator in collaborators" class="ut-fade">
+                <td ui-sref="collaborator({collaboratorId:collaborator.id})" class="link">{{collaborator.id}}</td>
+                <td
+                    ng-show="showColumns.indexOf('groupName') > -1"
+                    ui-sref="collaborator({collaboratorId:collaborator.id})"
+                    class="link"
+                >
+                    {{collaborator.groupName}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('description') > -1"
+                >
+                    {{collaborator.description}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('location') > -1"
+                >
+                    {{collaborator.location}}
+                </td>
+                <td class="actions">
+                    <ut-dropdown
+                        icon="icon-cog"
+                        template="/app/partials/collaborator/grid_actions.html"
+                        data="collaborator"
+                    >
+                    </ut-dropdown>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div ng-if="!collaborators[0].gridParams.total" class="no-results">
+        No Results Found
+    </div>
+</div>
+
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_bottom.html'"></div>

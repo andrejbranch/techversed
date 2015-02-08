@@ -1,0 +1,104 @@
+<div class="modal-header">
+    <h3 ng-if="!mta.id">Create CDA</h3>
+    <h3 ng-if="mta.id">Edit CDA {{ cda.id }} - {{ cda.description }}</h3>
+</div>
+<div class="ut-form-body">
+    <div class="modal-body" ut-modal-body>
+        <form id="utilities-modal-form" class="form-horizontal">
+            <div class="space-medium">
+
+                <ut-control-group>
+                    <div ng-repeat="globalError in cda.globalErrors" class="ut-global-error">
+                        {{globalError}}
+                    </div>
+                </ut-control-group>
+
+                <ut-control-group label="User" required>
+                    <ut-typeahead
+                        model="cda.User"
+                        key="cda.userId"
+                        resource="user"
+                        resource-primary-key="u_id"
+                        placeholder="fullName"
+                        template-url="/app/partials/typeahead/user.html"
+                        disabled
+                        error="cda.errors.userId"
+                    </ut-typeahead>
+                </ut-control-group>
+
+                <ut-control-group label="CDA Number">
+                    <ut-input
+                        model="cda.cdaNumber"
+                        error="cda.errors.cdaNumber"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Description" required>
+                    <ut-input
+                        model="cda.description"
+                        error="cda.errors.description"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Recipients" class="ut-many-input-max-width">
+                    <ut-one-to-many
+                        resource="collaborator"
+                        model="cda"
+                        foreign-key="recipientId"
+                        relation="CDARelations"
+                        access="cda.Recipients"
+                        placeholder="groupName"
+                    />
+                    </ut-one-to-many>
+                </ut-control-group>
+
+                <ut-control-group label="Investigators" class="ut-many-input-max-width">
+                    <ut-one-to-many
+                        resource="contact"
+                        model="cda"
+                        foreign-key="investigatorId"
+                        relation="CDARelations"
+                        access="cda.Investigators"
+                        placeholder="name"
+                    />
+                    </ut-one-to-many>
+                </ut-control-group>
+
+                <ut-control-group label="Institutions" class="ut-many-input-max-width">
+                    <ut-one-to-many
+                        resource="collaborator"
+                        model="cda"
+                        foreign-key="institutionId"
+                        relation="CDARelations"
+                        access="cda.Institutions"
+                        placeholder="groupName"
+                    />
+                    </ut-one-to-many>
+                </ut-control-group>
+
+                <ut-control-group label="Status" ng-if="cda.id" required>
+                    <select ng-model="cda.status">
+                        <option value="Fully Executed">Fully Executed</option>
+                        <option value="Pending">Pending</option>
+                    </select>
+                    <div ng-if="cda.errors.status" class="ut-global-error">{{cda.errors.status}}</div>
+                </ut-control-group>
+
+                <div class="ut-form-divider"></div>
+
+                <ut-control-group label="Attachments">
+                    <ut-attachment-uploader o="ConfidentialityDisclosureAgreement" oid="cda.id" trigger="handleUpload"></ut-attachment-uploader>
+                </ut-control-group>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="cda.id">Save</a>
+        <a ng-if="!cda.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

@@ -1,0 +1,79 @@
+<div class="modal-header">
+    <h3 ng-if="!culture.id">Create Culture</h3>
+    <h3 ng-if="culture.id">Edit Culture {{ culture.id }} - {{ culture.Sample.description}}</h3>
+</div>
+<div class="ut-form-body">
+    <div class="modal-body" ut-modal-body>
+        <form id="sample-modal-form" class="form-horizontal">
+            <div class="space-medium">
+
+                <ut-control-group>
+                    <div ng-repeat="globalError in culture.globalErrors" class="ut-global-error">
+                        {{globalError}}
+                    </div>
+                </ut-control-group>
+
+                <ut-control-group label="Sample" required>
+                    <ut-typeahead
+                        model="culture.Sample"
+                        key="culture.sampleId"
+                        placeholder="description"
+                        resource="sample-typeahead"
+                        error="culture.errors.sampleId"
+                    >
+                    </ut-typeahead>
+                </ut-control-group>
+
+                <ut-control-group label="Concentration (mg/mL):">
+                    <ut-input
+                        model="culture.concentration"
+                        error="culture.errors.concentration"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Volume (mL):">
+                    <ut-input
+                        model="culture.volume"
+                        error="culture.errors.volume"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Date of Purification:">
+                    <input
+                        type="text"
+                        datepicker-popup="M/dd/yyyy"
+                        ng-model="culture.dateOfPurification"
+                        class="ut-input"
+                    >
+                    </input>
+                </ut-control-group>
+
+                <ut-control-group label="Expected Availability:">
+                    <input
+                        type="text"
+                        datepicker-popup="M/dd/yyyy"
+                        ng-model="culture.expectedAvailability"
+                        class="ut-input"
+                    >
+                    </input>
+                </ut-control-group>
+
+                <div class="ut-form-divider"></div>
+
+                <ut-control-group label="Attachments">
+                    <ut-attachment-uploader o="AntibodyRequest" oid="antibodyRequest.id" trigger="handleUpload"></ut-attachment-uploader>
+                </ut-control-group>
+
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="culture.id">Save</a>
+        <a ng-if="!culture.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

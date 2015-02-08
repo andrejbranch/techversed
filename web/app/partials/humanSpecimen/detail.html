@@ -1,0 +1,123 @@
+<div id="ut-detail-container">
+    <div class="header">
+        <div class="operations">
+            <ut-dropdown
+                icon="operations-icon-share"
+                title="Share"
+                template="/app/partials/grid/share.html"
+            >
+            </ut-dropdown>
+        </div>
+        <img class="header-icon" src="/images/utilities/inventory/sample-icon.png" />
+        <ul class="ut-breadcrumbs">
+            <li ui-sref="croweLab">Crowelab</li>
+            <li ui-sref="humanSpecimenGrid.search">Human Specimen Samples</li>
+            <li class="end">Human Specimen Sample {{humanSpecimen.id}}</li>
+            <li class="title">Human Specimen Sample {{humanSpecimen.id}} From Donor {{humanSpecimen.donorId}}</li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="toolbar">
+            <button class="btn" ng-click="edit()">
+                <i class="icon-pencil" />
+                Edit
+            </button>
+            <button class="btn" ng-click="comment()"><i class="icon-comment" /> Comment</button>
+            <button class="btn" ng-click="updateStatus()"><i class="icon-time" /> Update Status</button>
+            <div class="right">
+                <img src="/images/utilities/inventory/trash_icon.png" ng-click="delete()"></img>
+            </div>
+        </div>
+        <div class="main-column">
+            <ut-edit-module title="Details">
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>Protocol:</td>
+                            <td>
+                                <a class="flat-link" ui-sref="protocol({protocolId:humanSpecimen.Protocol.id})">{{humanSpecimen.Protocol.protocol}}</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr></tr>
+                    </table>
+                </div>
+            </ut-edit-module>
+
+            <ut-edit-module title="Status Updates">
+                <div ng-include="'/app/partials/humanSpecimen/statusList.html'"></div>
+            </ut-edit-module>
+
+            <ut-edit-module title="Samples" class="ut-position-relative">
+                <div ng-include src="'/app/partials/humanSpecimen/samplesList.html'"/>
+            </ut-edit-module>
+
+            <ut-edit-module title="Attachments">
+                <ut-attachment-module
+                    o="HumanSpecimen"
+                    oid="humanSpecimen.id"
+                >
+                </ut-attachment-module>
+            </ut-edit-module>
+            <ut-edit-module title="Activity">
+                <ut-activity-module
+                    o="HumanSpecimen"
+                    oid="humanSpecimen.id"
+                    comment="comment"
+                >
+                </ut-activity-module>
+            </ut-edit-module>
+        </div>
+
+        <div class="side-column">
+            <ut-edit-module title="People">
+                <table class="detail">
+                    <tr>
+                        <td>Donor:</td>
+                        <td>
+                            <a class="flat-link" ui-sref="donor({donorId:humanSpecimen.Donor.id})">{{humanSpecimen.Donor.toString}}</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Blood Drawer:</td>
+                        <td>
+                            <img ng-if="humanSpecimen.userId" ng-src="/profile/avatar/{{humanSpecimen.userId}}" />
+                            {{humanSpecimen.User.fullName}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Blood Requester:</td>
+                        <td>
+                            <img ng-if="humanSpecimen.requesterId" ng-src="/profile/avatar/{{humanSpecimen.requesterId}}" />
+                            {{humanSpecimen.Requester.fullName}}
+                        </td>
+                    </tr>
+
+                </table>
+            </ut-edit-module>
+            <ut-edit-module title="Dates">
+                <table class="detail">
+                    <tr>
+                        <td>Date of Consent:</td>
+                        <td>{{ humanSpecimen.dateOfConsent | utDate | date:'MM/dd/yy @ h:mma'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Date of Draw:</td>
+                        <td>{{ humanSpecimen.dateOfDraw | utDate | date:'MM/dd/yy @ h:mma'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Created:</td>
+                        <td>{{ humanSpecimen.created_at | utDate | date:'MM/dd/yy @ h:mma'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Updated:</td>
+                        <td>{{ humanSpecimen.updated_at | utDate | date:'MM/dd/yy @ h:mma'}}</td>
+                    </tr>
+                </table>
+            </ut-edit-module>
+        </div>
+    </div>
+</div>

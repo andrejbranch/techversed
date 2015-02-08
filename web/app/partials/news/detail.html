@@ -1,0 +1,86 @@
+<div id="ut-detail-container" class="ut-classification-detail-container">
+    <div class="header">
+        <div class="operations">
+            <ut-dropdown
+                icon="operations-icon-share"
+                title="Share"
+                template="/app/partials/grid/share.html"
+            >
+            </ut-dropdown>
+        </div>
+        <img class="header-icon big" src="/images/utilities/inventory/news-icon.png" />
+        <ul class="ut-breadcrumbs">
+            <li ui-sref="adminCore">Admin Core</li>
+            <li ui-sref="newsGrid.search">News</li>
+            <li class="end">{{news.id}}</li>
+            <li class="title">{{news.title}}</li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="toolbar">
+            <button class="btn" ng-click="edit()" ng-if="canEdit()">
+                <i class="icon-pencil" />
+                Edit
+            </button>
+            <button class="btn" ng-click="comment()"><i class="icon-comment" /> Comment</button>
+            <div class="right">
+                <img src="/images/utilities/inventory/trash_icon.png" ng-click="openDelete()"></img>
+            </div>
+        </div>
+        <div class="main-column">
+            <ut-edit-module title="Details">
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>Lab Core:</td>
+                            <td>{{news.LabCore.name}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>Date:</td>
+                            <td>{{news.date}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </ut-edit-module>
+            <ut-edit-module title="Content">
+                <div ng-bind-html="news.content"></div>
+            </ut-edit-module>
+            <ut-edit-module title="Image">
+                <ut-attachment-module
+                    o="VvcNews"
+                    oid="news.id"
+                >
+                </ut-attachment-module>
+            </ut-edit-module>
+
+            <ut-edit-module title="Activity">
+                <ut-activity-module
+                    o="VvcNews"
+                    oid="news.id"
+                    comment="comment"
+                >
+                </ut-activity-module>
+            </ut-edit-module>
+        </div>
+
+        <div class="side-column">
+            <ut-edit-module title="Status">
+                <table class="detail">
+                    <tr>
+                        <td>Has news been published?:</td>
+                        <td ng-if="news.published">
+                            <img ng-src="/images/utilities/inventory/green-checkmark.png" />
+                        </td>
+                        <td ng-if="!news.published">
+                            <img ng-src="/images/utilities/inventory/red-x.png" />
+                        </td>
+                    </tr>
+                </table>
+            </ut-edit-module>
+        </div>
+    </div>
+</div>

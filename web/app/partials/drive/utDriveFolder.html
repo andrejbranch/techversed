@@ -1,0 +1,15 @@
+<div class="item" ng-style="itemPadding" ng-class="{selected:isSelected()}">
+    <div
+        ng-if="isExpandable()"
+        ng-class="{right:!expanded, down:expanded}"
+        class="arrow"
+        ng-click="toggle()"
+    />
+    <div ng-if="!isExpandable()" class="spacer"></div>
+
+    <div class="folder-icon"></div>
+    <div ng-if="!renaming" class="name">{{folder.name}}</div>
+    <input ng-if="renaming" ng-model="folder.name" ut-focus></input>
+</div>
+
+<ul class="children"></ul>

@@ -1,0 +1,127 @@
+<div class="modal-header">
+    <h3 ng-if="!mta.id">Create MTA</h3>
+    <h3 ng-if="mta.id">Edit MTA {{ mta.id }} - {{ mta.shortDescription }}</h3>
+</div>
+<div class="ut-form-body">
+    <div class="modal-body" ut-modal-body>
+        <form id="sample-modal-form" class="form-horizontal">
+            <div class="space-medium">
+
+                <ut-control-group>
+                    <div ng-repeat="globalError in mta.globalErrors" class="ut-global-error">
+                        {{globalError}}
+                    </div>
+                </ut-control-group>
+
+                <ut-control-group label="Short Description" required>
+                    <ut-input
+                        model="mta.shortDescription"
+                        error="mta.errors.shortDescription"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Investigator" required>
+                    <ut-input
+                        model="mta.investigator"
+                        error="mta.errors.investigator"
+                    >
+                    </ut-input>
+                </ut-control-group  >
+
+                <ut-control-group label="Date Effective">
+                    <input
+                        type="text"
+                        datepicker-popup="M/dd/yyyy"
+                        ng-model="mta.dateEffective"
+                        class="ut-input"
+                    />
+                </ut-control-group>
+
+                <ut-control-group label="Agreement Number">
+                    <ut-input
+                        model="mta.agreementNumber"
+                        error="mta.errors.agreementNumber"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Materials" required>
+                    <ut-input
+                        model="mta.materials"
+                        error="mta.errors.materials"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Purpose" required>
+                    <ut-input
+                        model="mta.purpose"
+                        error="mta.errors.purpose"
+                    />
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Status" required>
+                    <select ng-model="mta.status">
+                        <option value="Fully Executed">Fully Executed</option>
+                        <option value="Pending">Pending</option>
+                    </select>
+                    <div ng-if="mta.errors.status" class="ut-global-error">{{mta.errors.status}}</div>
+                </ut-control-group>
+
+                <ut-control-group label="Provider">
+                    <ut-input
+                        model="mta.provider"
+                        error="mta.error.provider"
+                    />
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Recipient" required>
+                    <ut-input
+                        model="mta.recipient"
+                        error="mta.errors.recipient"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="User" required>
+                    <ut-typeahead
+                        model="mta.User"
+                        key="mta.userId"
+                        resource="user"
+                        resource-primary-key="u_id"
+                        placeholder="fullName"
+                        template-url="/app/partials/typeahead/user.html"
+                        disabled
+                        error="mta.errors.userId"
+                    </ut-typeahead>
+                </ut-control-group>
+
+                <ut-control-group label="Material Status" required>
+                    <select ng-model="mta.materialStatus">
+                        <option value="Pending">Pending</option>
+                        <option value="Sent">Sent</option>
+                        <option value="Received">Received</option>
+                        <option value="Waiting for Shipment">Waiting for Shipment</option>
+                    </select>
+                    <div ng-if="mta.errors.materialStatus" class="ut-global-error">{{mta.errors.materialStatus}}</div>
+                </ut-control-group>
+
+                <div class="ut-form-divider"></div>
+
+                <ut-control-group label="Attachments">
+                    <ut-attachment-uploader o="MaterialTransferAgreement" oid="mta.id" trigger="handleUpload"></ut-attachment-uploader>
+                </ut-control-group>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="mta.id">Save</a>
+        <a ng-if="!mta.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

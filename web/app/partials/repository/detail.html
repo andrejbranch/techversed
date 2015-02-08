@@ -1,0 +1,92 @@
+<div id="ut-detail-container">
+    <div class="header">
+        <div class="operations">
+            <ut-dropdown
+                icon="operations-icon-share"
+                title="Share"
+                template="/app/partials/grid/share.html"
+            >
+            </ut-dropdown>
+        </div>
+        <img class="header-icon big" src="/images/utilities/inventory/repository_icon.png" />
+        <ul class="ut-breadcrumbs">
+            <li ui-sref="croweLab">Crowelab</li>
+            <li ui-sref="repositoryGrid.search">Repositories</li>
+            <li class="end">{{repository.id}}</li>
+            <li class="title">{{repository.title}}</li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="toolbar">
+            <button class="btn" ng-click="edit()" ng-if="canEdit()">
+                <i class="icon-pencil" />
+                Edit
+            </button>
+            <button class="btn" ng-click="comment()"><i class="icon-comment" />Comment</button>
+        </div>
+        <div class="main-column">
+            <ut-edit-module title="Details">
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>Title:</td>
+                            <td>{{repository.title}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </ut-edit-module>
+
+            <ut-edit-module title="Description">
+                {{repository.description}}
+            </ut-edit-module>
+
+            <ut-edit-module title="Samples" class="ut-position-relative">
+                <div ng-include="'app/partials/repository/repository_samples.html'"></div>
+            </ut-edit-module>
+
+            <ut-edit-module title="Attachments">
+                <ut-attachment-module
+                    o="Repository"
+                    oid="repository.id"
+                >
+                </ut-attachment-module>
+            </ut-edit-module>
+
+            <ut-edit-module title="Activity">
+                <ut-activity-module
+                    o="Repository"
+                    oid="repository.id"
+                    comment="comment"
+                >
+                </ut-activity-module>
+            </ut-edit-module>
+        </div>
+        <div class="side-column">
+            <ut-edit-module title="People">
+                <table class="detail">
+                    <tr>
+                        <tr>
+                            <td>Creator:</td>
+                            <td>
+                                <img ng-if="repository.userId" ng-src="/profile/avatar/{{repository.userId}}" />
+                                {{repository.User.fullName}}
+                            </td>
+                        </tr>
+                    </tr>
+                </table>
+            </ut-edit-module>
+            <ut-edit-module title="Dates">
+                <table class="detail">
+                    <tr>
+                        <td>Created:</td>
+                        <td>{{repository.created_at | utDate | date:'MM/dd/yy @ h:mma'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Updated:</td>
+                        <td>{{repository.updated_at | utDate | date:'MM/dd/yy @ h:mma'}}</td>
+                    </tr>
+                </table>
+            </ut-edit-module>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,95 @@
+<div class="modal-header">
+    <h3 ng-if="!humanSpecimen.id">Create Human Specimen Sample</h3>
+    <h3 ng-if="humanSpecimen.id">Edit Human Specimen Sample {{humanSpecimen.id}}</h3>
+</div>
+<div class="modal-body" ut-modal-body>
+    <form id="sample-modal-form" class="form-horizontal">
+        <div class="space-medium">
+
+            <ut-control-group>
+                <div ng-repeat="globalError in humanSpecimen.globalErrors" class="ut-global-error">
+                    {{globalError}}
+                </div>
+            </ut-control-group>
+
+            <ut-control-group label="Donor" required>
+                <ut-typeahead
+                    model="humanSpecimen.Donor"
+                    key="humanSpecimen.donorId"
+                    resource="donor-typeahead"
+                    placeholder="toString"
+                    error="humanSpecimen.errors.donorId"
+                >
+                </ut-typeahead>
+            </ut-control-group>
+
+            <ut-control-group label="User">
+                <ut-typeahead
+                    model="humanSpecimen.User"
+                    key="humanSpecimen.userId"
+                    resource="user"
+                    resource-primary-key="u_id"
+                    placeholder="fullName"
+                    template-url="/app/partials/typeahead/user.html"
+                    disabled=""
+                    error="humanSpecimen.errors.userId"
+                </ut-typeahead>
+            </ut-control-group>
+
+            <ut-control-group label="Requester">
+                <ut-typeahead
+                    model="humanSpecimen.Requester"
+                    key="humanSpecimen.requesterId"
+                    resource="user"
+                    resource-primary-key="u_id"
+                    placeholder="fullName"
+                    template-url="/app/partials/typeahead/user.html"
+                    error="humanSpecimen.errors.requesterId"
+                </ut-typeahead>
+            </ut-control-group>
+
+            <ut-control-group label="Date of Consent">
+                <input
+                    type="text"
+                    datepicker-popup="M/dd/yyyy"
+                    ng-model="humanSpecimen.dateOfConsent"
+                    class="ut-input"
+                />
+            </ut-control-group>
+
+            <ut-control-group label="Date of Draw">
+                <input
+                    type="text"
+                    datepicker-popup="M/dd/yyyy"
+                    ng-model="humanSpecimen.dateOfDraw"
+                    class="ut-input"
+                />
+            </ut-control-group>
+
+            <ut-control-group label="Protocol">
+                <ut-typeahead
+                    model="humanSpecimen.Protocol"
+                    key="humanSpecimen.protocolId"
+                    resource="protocol"
+                    placeholder="protocol"
+                    error="humanSpecimen.errors.protocolId"
+                >
+                </ut-typeahead>
+            </ut-control-group>
+
+            <div class="ut-form-divider"></div>
+
+            <ut-control-group label="Attachments">
+                <ut-attachment-uploader o="Blood" oid="humanSpecimen.id" trigger="handleUpload"></ut-attachment-uploader>
+            </ut-control-group>
+
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="humanSpecimen.id">Save</a>
+        <a ng-if="!humanSpecimen.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

@@ -1,0 +1,47 @@
+<div class="modal-header">
+    <h3 ng-if="!species.id">Create Species</h3>
+    <h3 ng-if="species.id">Edit Species {{ species.id }} - {{ species.name }}</h3>
+</div>
+<div class="ut-form-body">
+    <div class="modal-body" ut-modal-body>
+        <form id="sample-modal-form" class="form-horizontal">
+            <div class="space-medium">
+
+                <ut-control-group>
+                    <div ng-repeat="globalError in species.globalErrors" class="ut-global-error">
+                        {{globalError}}
+                    </div>
+                </ut-control-group>
+
+                <ut-control-group label="Name" required>
+                    <ut-input
+                        model="species.name"
+                        error="species.errors.name"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Common name">
+                    <ut-input
+                        model="species.common_name"
+                        error="species.errors.common_name"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <div class="ut-form-divider"></div>
+
+                <ut-control-group label="Attachments">
+                    <ut-attachment-uploader o="Species" oid="species.id" trigger="handleUpload"></ut-attachment-uploader>
+                </ut-control-group>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="species.id">Save</a>
+        <a ng-if="!species.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

@@ -1,0 +1,34 @@
+<div class="ut-relative-plus-icon" ng-if="canEdit()" ng-click="cultureStatusModal()">
+    <i class="icon-plus"></i>
+</div>
+<div id="ut-detail-table">
+    <table >
+        <thead>
+            <tr>
+                <th> Date of Status </th>
+                <th> Status Name</th>
+                <th> Notes </th>
+                <th ng-if="canEdit()"></th>
+            </tr>
+        </thead>
+        <tbody id="antibody-request-table">
+            <tr ng-repeat="cultureStatus in cultureStatuses">
+                <td> {{cultureStatus.date}} </td>
+                <td >
+                    <a  ui-sref="cultureStatusDetail({cultureStatusDetailId:cultureStatus.statusDetailId})" class="flat-link" class="ut-flat-link-cursor">
+                        {{cultureStatus.CultureStatusDetail.name}}
+                    </a>
+                </td>
+                <td> {{cultureStatus.notes}} </td>
+                <td class="ut-actions-td" ng-if="canEdit()">
+                    <div class="ut-table-edit-delete-icons">
+                        <i class="icon-pencil" ng-click="cultureStatusModal(cultureStatus)"></i>
+                    </div>
+                    <div class="ut-table-edit-delete-icons" ng-click="deleteCultureStatus(cultureStatus)">
+                        <i class="icon-trash"></i>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

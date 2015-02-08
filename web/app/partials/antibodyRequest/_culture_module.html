@@ -1,0 +1,38 @@
+<div class="ut-relative-plus-icon" ng-if="canEdit()" ng-click="cultureModal(culture)">
+    <i class="icon-pencil"></i>
+</div>
+<div class="detail-column">
+    <table class="detail">
+        <tr>
+            <td>ID:</td>
+            <td>
+                <a ui-sref="culture({cultureId:culture.id})" class="link">
+                    Culture {{culture.id}}
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>Sample:</td>
+            <td>
+                <a ui-sref="sample({sampleId:culture.sampleId})" class="flat-link">
+                {{culture.Sample.description}}
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="detail-column">
+    <table class="detail">
+        <tr>
+            <td>Culture Status:</td>
+            <td>{{culture.CultureStatusDetail.name}}</td>
+        </tr>
+        <tr>
+            <td>Concentration (mg/mL):</td>
+            <td>{{culture.concentration}}</td>
+        </tr>
+        <tr>
+            <td>Volume (mL):</td>
+            <td>{{culture.volume}}</td>
+        </tr>
+    </table>
+</div>

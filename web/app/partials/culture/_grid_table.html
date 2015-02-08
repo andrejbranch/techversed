@@ -1,0 +1,159 @@
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_top.html'"></div>
+
+<div id="ut-grid-table-container">
+    <table id="antibody-request-table" ng-if="cultures[0].gridParams.total">
+        <thead>
+            <tr>
+                <th ut-grid-header sort-field="id" label="Id"></th>
+                <th
+                    ut-grid-header
+                    label="Sample"
+                    ng-show="showColumns.indexOf('sampleId') > -1"
+                    allow-sort="true"
+                    sort-field="s.description"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="u.u_first_name"
+                    label="User"
+                    ng-show="showColumns.indexOf('userId') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Date Of Last Status Update"
+                    ng-show="showColumns.indexOf('dateOfLastStatusUpdate') > -1"
+                    allow-sort="true"
+                    sort-field="dateOfLastStatusUpdate"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Date of Purifcation"
+                    ng-show="showColumns.indexOf('dateOfPurification') > -1"
+                    allow-sort="true"
+                    sort-field="dateOfPurification"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Concentration (mg/mL)"
+                    ng-show="showColumns.indexOf('concentration') > -1"
+                    allow-sort="true"
+                    sort-field="concentration"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Volume (mL)"
+                    ng-show="showColumns.indexOf('volume') > -1"
+                    allow-sort="true"
+                    sort-field="volume"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Expected Availability"
+                    ng-show="showColumns.indexOf('expectedAvailability') > -1"
+                    allow-sort="true"
+                    sort-field="expectedAvailability"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Culture Status"
+                    ng-show="showColumns.indexOf('currentCultureStatusId') > -1"
+                    sort-field="currentCultureStatusId"
+                    allow-sort="true"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="created_at"
+                    label="Created At"
+                    ng-show="showColumns.indexOf('created_at') > -1"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="updated_at"
+                    label="Updated At"
+                    ng-show="showColumns.indexOf('updated_at') > -1"
+                >
+                </th>
+                <th class="actions" ng-if="canEdit()"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="culture in cultures" class="ut-fade">
+                <td ui-sref="culture({cultureId:culture.id})" class="link">{{culture.id}}</td>
+                <td
+                    ng-show="showColumns.indexOf('sampleId') > -1"
+                >
+                    <a class="flat-link" ui-sref="sample({sampleId:culture.Sample.id})">{{culture.Sample.description}}</a>
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('userId') > -1"
+                >
+                    {{culture.User.fullName}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('dateOfLastStatusUpdate') > -1"
+                >
+                    {{culture.dateOfLastStatusUpdate | date:'MM/dd/yy'}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('dateOfPurification') > -1"
+                >
+                    {{culture.dateOfPurification | date:'MM/dd/yy'}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('concentration') > -1"
+                >
+                    {{culture.concentration}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('volume') > -1"
+                >
+                    {{culture.volume}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('expectedAvailability') > -1"
+                >
+                    {{culture.expectedAvailability | date:'MM/dd/yy'}}
+                </td>
+                <td
+                    class="culture-status-{{culture.CultureStatusDetail.color}}"
+                    ng-show="showColumns.indexOf('currentCultureStatusId') > -1"
+                >
+                    {{culture.CultureStatusDetail.name}}</a>
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('created_at') > -1"
+                >
+                    {{culture.created_at | utDate | date:'MM/dd/yy @ h:mma'}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('updated_at') > -1"
+                >
+                    {{culture.updated_at | utDate | date:'MM/dd/yy @ h:mma'}}
+                </td>
+                <td class="actions" ng-if="canEdit()">
+                    <ut-dropdown
+                        icon="icon-cog"
+                        template="/app/partials/culture/grid_actions.html"
+                        data="culture"
+                    >
+                    </ut-dropdown>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div ng-if="!cultures[0].gridParams.total" class="no-results">
+        No Results Found
+    </div>
+</div>
+
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_bottom.html'"></div>

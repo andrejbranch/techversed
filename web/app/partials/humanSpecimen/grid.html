@@ -1,0 +1,73 @@
+<div id="ut-grid-container">
+    <div class="header">
+        <div class="header-section">
+            <div class="operations">
+                <ut-dropdown
+                    icon="operations-icon-export"
+                    title="Export"
+                    template="/app/partials/humanSpecimen/csvExport.html"
+                >
+                </ut-dropdown>
+            </div>
+            <div class="operations">
+                <ut-dropdown
+                    icon="operations-icon-share"
+                    title="Share"
+                    template="/app/partials/grid/share.html"
+                >
+                </ut-dropdown>
+            </div>
+            <div class="header-primary">
+                <h3>Human Specimen Search</h3>
+                <button class="btn" ng-click="createHumanSpecimenSample()">Create Human Specimen Sample</button>
+            </div>
+        </div>
+    </div>
+    <div class="filters-container">
+        <div class="operations">
+            <button class="btn"><i class="icon-list"></i></button>
+        </div>
+        <div class="filters">
+
+            <ut-dropdown
+                title="Donor: All"
+                template="/app/partials/filters/donors.html"
+            >
+            </ut-dropdown>
+
+            <ut-dropdown
+                title="Protocol: All"
+                template="/app/partials/filters/protocols.html"
+            >
+            </ut-dropdown>
+
+            <ut-dropdown
+                title="Users: All"
+                template="/app/partials/filters/users.html"
+            >
+            </ut-dropdown>
+
+            <ut-dropdown
+                title="Requesters: All"
+                template="/app/partials/filters/human_specimen_requesters.html"
+            >
+            </ut-dropdown>
+
+            <ut-dropdown
+                title="From Donors with Immunities: All"
+                template="/app/partials/filters/fromDonorsWithImmunities.html"
+                class="human-specimen-grid"
+            >
+            </ut-dropdown>
+
+            <ut-dropdown
+                title="Created At: All"
+                template="/app/partials/filters/created_at.html"
+            >
+            </ut-dropdown>
+
+        </div>
+    </div>
+
+    <div ui-view class="ut-fade"></div>
+</div>

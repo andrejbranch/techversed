@@ -1,0 +1,166 @@
+<div id="ut-detail-container">
+    <div class="header">
+        <div class="operations">
+            <ut-dropdown
+                icon="operations-icon-share"
+                title="Share"
+                template="/app/partials/grid/share.html"
+            >
+            </ut-dropdown>
+        </div>
+        <img class="header-icon big" src="/images/utilities/drive/icon_sequencing.png" />
+        <ul class="ut-breadcrumbs">
+            <li ui-sref="gocore">GoCore</li>
+            <li ui-sref="dnaPurificationGrid.search">DNA Purification</li>
+            <li class="end">DNA Purification {{dnaPurification.id}}</li>
+            <li class="title">Purification Request {{dnaPurification.Sample.description}}</li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="toolbar" ng-if="canEdit()">
+            <button class="btn" ng-click="edit()">
+                <i class="icon-pencil" />
+                Edit
+            </button>
+            <button class="btn" ng-click="comment()"><i class="icon-comment" /> Comment</button>
+            <div class="right">
+                <img src="/images/utilities/inventory/trash_icon.png" ng-click="delete()"></img>
+            </div>
+        </div>
+        <div class="main-column">
+            <ut-edit-module title="Details">
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>Sample:</td>
+                            <td>{{dnaPurification.Sample.description}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>Chain:</td>
+                            <td>{{dnaPurification.chain}}</td>
+                        </tr>
+                        <tr>
+                            <td>Elution Buffer:</td>
+                            <td>{{dnaPurification.elutionBuffer}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </ut-edit-module>
+            <ut-edit-module title="Values">
+                <div class="detail-column">
+                    <table class="detail">
+                         <tr>
+                            <td>Elution Volume:</td>
+                            <td>{{dnaPurification.elutionVolume}}</td>
+                        </tr>
+                        <tr>
+                            <td>Culture Volume:</td>
+                            <td>{{dnaPurification.cultureVolume}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>Concentration:</td>
+                            <td>{{dnaPurification.concentration}}</td>
+                        </tr>
+                        <tr>
+                            <td>DNA Yield:</td>
+                            <td>{{dnaPurification.dnaYield}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </ut-edit-module>
+            <ut-edit-module title="Legacy Notes and Comments" ng-if="oldComments()">
+                <div class="detail-column">
+                    <table class="detail">
+                         <tr>
+                            <td>Notes:</td>
+                            <td>{{dnaPurification.notes}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>Comments:</td>
+                            <td>{{dnaPurification.comments}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </ut-edit-module>
+            <ut-edit-module title="NanoDrop File">
+                <a ng-if="dnaPurification.NanoDropFile" ng-click="downloadNanodropFile()" class="link" href="">
+                    Download Nanodrop File
+                </a>
+                <a ng-if="!dnaPurification.NanoDropFile">
+                    NanoDrop File Missing
+                </a>
+            </ut-edit-module>
+            <ut-edit-module title="Attachments">
+                <ut-attachment-module
+                    o="DnaPurification"
+                    oid="dnaPurification.id"
+                >
+                </ut-attachment-module>
+            </ut-edit-module>
+            <ut-edit-module title="Activity">
+                <ut-activity-module
+                    o="DnaPurification"
+                    oid="dnaPurification.id"
+                    comment="comment"
+                >
+                </ut-activity-module>
+            </ut-edit-module>
+        </div>
+        <div class="side-column">
+            <ut-edit-module title="Purification Status">
+                <table class="detail">
+                    <tr>
+                        <td>Status:</td>
+                        <td>
+                            {{dnaPurification.status}}
+                        </td>
+                    </tr>
+                </table>
+            </ut-edit-module>
+            <ut-edit-module title="Purification Requester">
+                <table class="detail">
+                    <tr>
+                        <td>User:</td>
+                        <td >
+                            <a ui-sref="directory({userId:dnaPurification.User.u_id})" class="flat-link">
+                                {{dnaPurification.User.fullName}}
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </ut-edit-module>
+            <ut-edit-module title="Dates">
+                <table class="detail">
+                    <tr>
+                        <td>Expected:</td>
+                        <td>{{ dnaPurification.expectedDate | utDate | date:'MM/dd/yy'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Completion:</td>
+                        <td>{{ dnaPurification.completionDate | utDate | date:'MM/dd/yy'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Created:</td>
+                        <td>{{ dnaPurification.created_at | utDate | date:'MM/dd/yy @ h:mma'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Updated:</td>
+                        <td>{{ dnaPurification.updated_at | utDate | date:'MM/dd/yy @ h:mma'}}</td>
+                    </tr>
+                </table>
+            </ut-edit-module>
+        </div>
+    </div>
+</div>

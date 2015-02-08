@@ -1,0 +1,43 @@
+<div id="freezer-navigation" ng-class="{expanded:freezerNavExpanded}">
+    <div class="header" ng-click="openFreezerNav()">
+        <i class="icon-white icon-chevron-down"></i>
+        <a>Freezer Navigation</a>
+    </div>
+    <div class="content">
+        <ul class="tabs">
+            <li class="freezers" ui-sref="boxView.freezerList"><i class="icon-white icon-book"></i></li>
+            <li class="divisions active" ui-sref="boxView.divisionList"><i class="icon-white icon-th-large"></i></li>
+            <li class="boxes" ui-sref="boxView.boxList({divisionId:box.divisionId})"><i class="icon-white icon-th"></i></li>
+            <li class="search"><i class="icon-white icon-search"></i></li>
+            <li class="fill"></li>
+        </ul>
+        <div class="division-list">
+            <ul>
+                <ul class="freezer-breadcrumb">
+                    <li class="freezer-nickname">{{freezer.nickname}}</li>
+                </ul>
+                <div class="division-container">
+                    <li ng-if="isInventoryAdmin()" ng-click="createDivision()">
+                        <i class="icon-white icon-plus"></i>
+                        <a>Create Division</a>
+                    </li>
+                    <li data-id="{{division.id}}" ng-repeat='division in divisions'>
+                        <div class="description-container">
+                            <div
+                                ui-sref="boxView.boxList({divisionId:division.id})"
+                                class="description"
+                            >
+                                <i class="icon-white icon-th-large"></i>
+                                <a>{{division.name}}</a>
+                            </div>
+                        </div>
+                        <div class="actions" ng-if="isInventoryAdmin()">
+                            <i class="icon-white icon-pencil" ng-click="editDivision(division)"></i>
+                            <i class="icon-white icon-trash" ng-click="deleteDivision(division)"></i>
+                        </div>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </div>
+</div>

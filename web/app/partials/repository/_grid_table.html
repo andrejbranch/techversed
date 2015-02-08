@@ -1,0 +1,66 @@
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_top.html'"></div>
+<div id="ut-grid-table-container">
+    <table ng-if="repositories[0].gridParams.total">
+        <thead>
+            <tr>
+                <th ut-grid-header sort-field="id" label="Id"></th>
+                <th
+                    ut-grid-header
+                    label="Title"
+                    ng-show="showColumns.indexOf('title') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="u.u_first_name"
+                    label="User"
+                    ng-show="showColumns.indexOf('userId') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Description"
+                    ng-show="showColumns.indexOf('description') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="repository in repositories" class="ut-fade">
+                <td ui-sref="repository({repositoryId:repository.id})" class="link">{{repository.id}}</td>
+                <td
+                    ng-show="showColumns.indexOf('title') > -1"
+                >
+                    {{repository.title}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('userId') > -1"
+                >
+                    {{repository.User.fullName}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('description') > -1"
+                >
+                    {{repository.description}}
+                </td>
+                <td class="actions">
+                    <ut-dropdown
+                        icon="icon-cog"
+                        template="/app/partials/repository/grid_actions.html"
+                        data="repository"
+                    >
+                    </ut-dropdown>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div ng-if="!repositories[0].gridParams.total" class="no-results">
+        No Results Found
+    </div>
+</div>
+
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_bottom.html'"></div>

@@ -1,0 +1,233 @@
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_top.html'"></div>
+<div id="ut-grid-table-container">
+    <table ng-if="travelLogs[0].gridParams.total">
+        <thead>
+            <tr>
+                <th ut-grid-header sort-field="id" label="Id"></th>
+                <th
+                    ut-grid-header
+                    label="taf"
+                    ng-show="showColumns.indexOf('taf') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Traveler"
+                    ng-show="showColumns.indexOf('traveler_id') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Event"
+                    ng-show="showColumns.indexOf('event') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Location"
+                    ng-show="showColumns.indexOf('location') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="departure_date"
+                    label="Departure Date"
+                    ng-show="showColumns.indexOf('departure_date') > -1"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="return_date"
+                    label="Return Date"
+                    ng-show="showColumns.indexOf('return_date') > -1"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Purpose"
+                    ng-show="showColumns.indexOf('purpose') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Project Center"
+                    ng-show="showColumns.indexOf('project_center') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Estimated Cost"
+                    ng-show="showColumns.indexOf('estimated_cost') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="RBV Whole"
+                    ng-show="showColumns.indexOf('rbv_whole') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="RBV in Part"
+                    ng-show="showColumns.indexOf('rbv_in_part') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="RBV non VUMC"
+                    ng-show="showColumns.indexOf('rbv_non_vumc') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Actual Cost"
+                    ng-show="showColumns.indexOf('actual_cost') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Actual Center"
+                    ng-show="showColumns.indexOf('actual_center') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Comments"
+                    ng-show="showColumns.indexOf('comments') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Status"
+                    ng-show="showColumns.indexOf('status') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Approver ID"
+                    ng-show="showColumns.indexOf('approver_id') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="travelLog in travelLogs" class="ut-fade">
+                <td ui-sref="travelLog({travelLogId:travelLog.id})" class="link">{{travelLog.id}}</td>
+                <td
+                    ng-show="showColumns.indexOf('taf') > -1"
+                >
+                    {{travelLog.taf}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('traveler_id') > -1"
+                >
+                    {{travelLog.Traveler.fullName}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('event') > -1"
+                >
+                    {{travelLog.event}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('location') > -1"
+                >
+                    {{travelLog.location}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('departure_date') > -1"
+                >
+                    {{travelLog.departure_date}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('return_date') > -1"
+                >
+                    {{travelLog.return_date}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('purpose') > -1"
+                >
+                    {{travelLog.purpose}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('project_center') > -1"
+                >
+                    {{travelLog.project_center}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('estimated_cost') > -1"
+                >
+                    {{travelLog.estimated_cost}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('rbv_whole') > -1"
+                >
+                    {{travelLog.rbv_whole}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('rbv_in_part') > -1"
+                >
+                    {{travelLog.rbv_in_part}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('rbv_non_vumc') > -1"
+                >
+                    {{travelLog.rbv_in_part}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('actual_cost') > -1"
+                >
+                    {{travelLog.actual_cost}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('actual_center') > -1"
+                >
+                    {{travelLog.actual_center}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('comments') > -1"
+                >
+                    {{travelLog.comments}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('status') > -1"
+                >
+                    {{travelLog.status}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('approver_id') > -1"
+                >
+                    {{travelLog.Approver.fullName}}
+                </td>
+                <td class="actions">
+                    <ut-dropdown
+                        icon="icon-cog"
+                        template="/app/partials/travelLog/grid_actions.html"
+                        data="travelLog"
+                    >
+                    </ut-dropdown>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div ng-if="!travelLogs[0].gridParams.total" class="no-results">
+        No Results Found
+    </div>
+</div>
+
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_bottom.html'"></div>

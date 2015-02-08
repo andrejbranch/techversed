@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <h3>Confirm Publication - "{{publication.title}}"</h3>
+</div>
+<div class="modal-body" ut-modal-body>
+    <div id="ut-comment-modal">
+        <div class="form-horizontal">
+            <p class="text-error">Are you sure you want to confirm this publication?</p>
+
+            <ut-control-group label="Publication Title" class="created">
+                <input type="hidden" />
+                "{{ publication.title}}""
+            </ut-control-group>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-success" ng-click="confirm()" style="margin-right:5px;">
+        <a>Confirm</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

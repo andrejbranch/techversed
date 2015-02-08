@@ -1,0 +1,53 @@
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_top.html'"></div>
+<div id="ut-grid-table-container">
+    <table ng-if="tags[0].gridParams.total">
+        <thead>
+            <tr>
+                <th ut-grid-header sort-field="id" label="Id"></th>
+                <th
+                    ut-grid-header
+                    label="Name"
+                    ng-show="showColumns.indexOf('name') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Description"
+                    ng-show="showColumns.indexOf('description') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="tag in tags" class="ut-fade">
+                <td ui-sref="tag({tagId:tag.id})" class="link">{{tag.id}}</td>
+                <td
+                    ng-show="showColumns.indexOf('name') > -1"
+                >
+                    {{tag.name}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('description') > -1"
+                >
+                    {{tag.description}}
+                </td>
+                <td class="actions">
+                    <ut-dropdown
+                        icon="icon-cog"
+                        template="/app/partials/tag/grid_actions.html"
+                        data="tag"
+                    >
+                    </ut-dropdown>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div ng-if="!tags[0].gridParams.total" class="no-results">
+        No Results Found
+    </div>
+</div>
+
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_bottom.html'"></div>

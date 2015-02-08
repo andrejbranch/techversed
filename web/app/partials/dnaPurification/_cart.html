@@ -1,0 +1,23 @@
+<div id="cart-requests" class="utilities-grid-container" ng-controller="DnaPurificationCartController">
+    <div class="cart-header">
+        DNA Purification Request Cart
+    </div>
+    <div id="cart-table-container">
+        <table>
+            <tbody>
+                <tr>
+                    <td class="fifty">
+                        <div class="content">
+                            <div class="ut-fade" ng-include="'/app/partials/dnaPurification/_cartRequestTable.html'"></div>
+                        </div>
+                    </td>
+                    <td class="fifty">
+                        <div class="content">
+                            <div class="ut-fade" ng-include="'/app/partials/dnaPurification/_cartActions.html'"></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

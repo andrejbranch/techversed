@@ -1,0 +1,144 @@
+<div id="ut-detail-container">
+    <div class="header">
+        <div class="operations">
+            <ut-dropdown
+                icon="operations-icon-share"
+                title="Share"
+                template="/app/partials/grid/share.html"
+            >
+            </ut-dropdown>
+        </div>
+        <img class="header-icon" src="/images/utilities/inventory/donor-icon.png" />
+        <ul class="ut-breadcrumbs">
+            <li ui-sref="croweLab">Crowelab</li>
+            <li ui-sref="donorGrid.search">Donors</li>
+            <li class="end">{{donor.id}}</li>
+            <li class="title">{{donor.toString}}</li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="toolbar">
+            <button class="btn" ng-click="edit()" ng-if="canEdit()">
+                <i class="icon-pencil" />
+                Edit
+            </button>
+            <button class="btn" ng-click="comment()"><i class="icon-comment" /> Comment</button>
+            <div class="right">
+                <img src="/images/utilities/inventory/trash_icon.png" ng-click="delete()"></img>
+            </div>
+        </div>
+        <div class="main-column full-width">
+
+            <ut-edit-module title="Contact (CTC users only)" ng-if="isCtcUser()">
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>First Name:</td>
+                            <td>{{donor.first_name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Last Name:</td>
+                            <td>{{donor.last_name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Phone:</td>
+                            <td>{{donor.phone}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>Address:</td>
+                            <td>{{donor.address}}</td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>{{donor.email}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </ut-edit-module>
+
+            <ut-edit-module title="Notes (CTC Users)" ng-if="isCtcUser()">
+                <div ng-bind-html="donor.notes"></div>
+            </ut-edit-module>
+
+            <ut-edit-module title="Details">
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>Gender:</td>
+                            <td>{{donor.gender}}</td>
+                        </tr>
+                        <tr>
+                            <td>Age:</td>
+                            <td>{{donor.age}}</td>
+                        </tr>
+                        <tr>
+                            <td>Aliases:</td>
+                            <td>{{donor.aliases}}</td>
+                        </tr>
+                        <tr>
+                            <td>Species:</td>
+                            <td>{{donor.Species.name}}</td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: top">Immunities:</td>
+                            <td>
+                                <ul>
+                                    <li ng-repeat="immunity in donor.immunities">
+                                        <a ng-if="!$last" class="flat-link" ui-sref="target({targetId:immunity.id})">
+                                            {{immunity.name + ",&nbsp;" }}
+                                        </a>
+                                        <a ng-if="$last" class="flat-link" ui-sref="target({targetId:immunity.id})">
+                                            {{immunity.name}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="detail-column">
+                    <table class="detail">
+
+                        <tr>
+                            <td>Ethnicity:</td>
+                            <td>{{donor.Ethnicity.name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Race:</td>
+                            <td>{{donor.Race.name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Human Specimens:</td>
+                            <td><a ui-sref="humanSpecimenGrid.search({donor:donor.id})">View Specimens Drawn from this Donor</a></td>
+                        </tr>
+                       <tr>
+                            <td>Samples:</td>
+                            <td><a ui-sref="sampleGrid.search({donor:donor.id})">View Samples Derived from this Donor</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </ut-edit-module>
+
+            <ut-edit-module title="Attachments">
+                <ut-attachment-module
+                    o="Donor"
+                    oid="donor.id"
+                >
+                </ut-attachment-module>
+            </ut-edit-module>
+
+            <ut-edit-module title="Activity">
+                <ut-activity-module
+                    o="Donor"
+                    oid="donor.id"
+                    comment="comment"
+                >
+                </ut-activity-module>
+            </ut-edit-module>
+        </div>
+    </div>
+</div>

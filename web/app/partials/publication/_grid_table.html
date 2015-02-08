@@ -1,0 +1,286 @@
+<div id="publication-grid-container">
+    <div class="ut-fade" ng-include="'/app/partials/grid/pagination_top.html'"></div>
+    <div id="ut-grid-table-container">
+        <table ng-if="publications[0].gridParams.total">
+            <thead>
+                <tr>
+                    <th ut-grid-header sort-field="id" label="Id"></th>
+                    <th
+                        ut-grid-header
+                        label="PubMed Id"
+                        ng-show="showColumns.indexOf('pub_med_id') > -1"
+                        allow-sort="false"
+                    >
+                    </th>
+                    <th
+                        ut-grid-header
+                        label="User"
+                        ng-show="showColumns.indexOf('user') > -1"
+                        allow-sort="false"
+                    >
+                    </th>
+                    <th
+                        ut-grid-header
+                        label="Publication Date"
+                        ng-show="showColumns.indexOf('pub_date') > -1"
+                        allow-sort="false"
+                    >
+                    </th>
+                    <th
+                        ut-grid-header
+                        label="E Publication Date"
+                        ng-show="showColumns.indexOf('e_pub_date') > -1"
+                        allow-sort="false"
+                    >
+                    </th>
+                    <th
+                        ut-grid-header
+                        label="PubMed Date"
+                        ng-show="showColumns.indexOf('pub_med_date') > -1"
+                        allow-sort="false"
+                    >
+                    </th>
+                    <th
+                        ut-grid-header
+                        label="Source"
+                        ng-show="showColumns.indexOf('source') > -1"
+                        allow-sort="false"
+                    >
+                    </th>
+                    <th
+                        ut-grid-header
+                        label="Authors"
+                        ng-show="showColumns.indexOf('authors') > -1"
+                        allow-sort="false"
+                    >
+                    </th>
+                    <th
+                        ut-grid-header
+                        label="Last Author"
+                        ng-show="showColumns.indexOf('last_author') > -1"
+                        allow-sort="false"
+                    >
+                    </th>
+                    <th
+                        ut-grid-header
+                        label="Title"
+                        ng-show="showColumns.indexOf('title') > -1"
+                        allow-sort="false"
+                    >
+                    </th>
+                    <th
+                        ut-grid-header
+                        label="Volume"
+                        ng-show="showColumns.indexOf('volume') > -1"
+                        allow-sort="false"
+                    >
+                    </th>
+                    <th
+                        ut-grid-header
+                        label="Issue"
+                        ng-show="showColumns.indexOf('issue') > -1"
+                        allow-sort="false"
+                    >
+                    </th>
+                    <th
+                        ut-grid-header
+                        label="Pages"
+                        ng-show="showColumns.indexOf('pages') > -1"
+                        allow-sort="false"
+                    >
+                    </th>
+                    <th
+                        ut-grid-header
+                        label="Languages"
+                        ng-show="showColumns.indexOf('languages') > -1"
+                        allow-sort="false"
+                    >
+                    </th>
+                    <th
+                        ut-grid-header
+                        label="NLM Unique Id"
+                        ng-show="showColumns.indexOf('nlm_unique_id') > -1"
+                        allow-sort="false"
+                    >
+                    </th>
+                    <th
+                        ut-grid-header
+                        label="ISSN"
+                        ng-show="showColumns.indexOf('issn') > -1"
+                        allow-sort="false"
+                    >
+                    </th>
+                    <th
+                        ut-grid-header
+                        label="ESSN"
+                        ng-show="showColumns.indexOf('essn') > -1"
+                        allow-sort="false"
+                    >
+                    </th>
+                    <th
+                        ut-grid-header
+                        label="Publication Types"
+                        ng-show="showColumns.indexOf('pub_types') > -1"
+                        allow-sort="false"
+                    >
+                    </th>
+                    <th
+                        ut-grid-header
+                        label="Record Status"
+                        ng-show="showColumns.indexOf('record_status') > -1"
+                        allow-sort="false"
+                    >
+                    </th>
+                    <th
+                        ut-grid-header
+                        label="Publication Status"
+                        ng-show="showColumns.indexOf('pub_status') > -1"
+                        allow-sort="false"
+                    >
+                    </th>
+                    <th
+                        ut-grid-header
+                        label="Full Journal Name"
+                        ng-show="showColumns.indexOf('full_journal_name') > -1"
+                        allow-sort="false"
+                    >
+                    </th>
+                    <th
+                        ut-grid-header
+                        label="Confirmed"
+                        ng-show="showColumns.indexOf('confirmed') > -1"
+                        allow-sort="false"
+                    >
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="publication in publications" class="ut-fade" ng-class="{true:'', false:'ut-bold-row'}[publication.confirmed]">
+                    <td ui-sref="publication({publicationId:publication.id})" class="link">{{publication.id}}</td>
+                    <td
+                        ng-show="showColumns.indexOf('pub_med_id') > -1"
+                    >
+                        {{publication.pub_med_id}}
+                    </td>
+                    <td
+                        ng-show="showColumns.indexOf('user') > -1"
+                    >
+                        {{publication.User.fullName}}
+                    </td>
+                    <td
+                        ng-show="showColumns.indexOf('pub_date') > -1"
+                    >
+                        {{publication.pub_date}}
+                    </td>
+                    <td
+                        ng-show="showColumns.indexOf('e_pub_date') > -1"
+                    >
+                        {{publication.e_pub_date}}
+                    </td>
+                    <td
+                        ng-show="showColumns.indexOf('pub_med_date') > -1"
+                    >
+                        {{publication.pub_med_date}}
+                    </td>
+                    <td
+                        ng-show="showColumns.indexOf('source') > -1"
+                    >
+                        {{publication.source}}
+                    </td>
+                    <td
+                        ng-show="showColumns.indexOf('authors') > -1"
+                    >
+                        {{publication.authors | truncate:110}}
+                    </td>
+                    <td
+                        ng-show="showColumns.indexOf('last_author') > -1"
+                    >
+                        {{publication.last_author}}
+                    </td>
+                    <td
+                        ng-show="showColumns.indexOf('title') > -1"
+                    >
+                        {{publication.title | truncate:110}}
+                    </td>
+                    <td
+                        ng-show="showColumns.indexOf('volume') > -1"
+                    >
+                        {{publication.volume}}
+                    </td>
+                    <td
+                        ng-show="showColumns.indexOf('issue') > -1"
+                    >
+                        {{publication.issue}}
+                    </td>
+                    <td
+                        ng-show="showColumns.indexOf('pages') > -1"
+                    >
+                        {{publication.pages}}
+                    </td>
+                    <td
+                        ng-show="showColumns.indexOf('languages') > -1"
+                    >
+                        {{publication.languages}}
+                    </td>
+                    <td
+                        ng-show="showColumns.indexOf('nlm_unique_id') > -1"
+                    >
+                        {{publication.nlm_unique_id}}
+                    </td>
+                    <td
+                        ng-show="showColumns.indexOf('issn') > -1"
+                    >
+                        {{publication.issn}}
+                    </td>
+                    <td
+                        ng-show="showColumns.indexOf('essn') > -1"
+                    >
+                        {{publication.essn}}
+                    </td>
+                    <td
+                        ng-show="showColumns.indexOf('pub_types') > -1"
+                    >
+                        {{publication.pub_types}}
+                    </td>
+                    <td
+                        ng-show="showColumns.indexOf('record_status') > -1"
+                    >
+                        {{publication.record_status}}
+                    </td>
+                    <td
+                        ng-show="showColumns.indexOf('pub_status') > -1"
+                    >
+                        {{publication.pub_status}}
+                    </td>
+                    <td
+                        ng-show="showColumns.indexOf('full_journal_name') > -1"
+                    >
+                        {{publication.full_journal_name}}
+                    </td>
+                    <td
+                        ng-show="showColumns.indexOf('confirmed') > -1"
+                    >
+                        <a class="confirmed-icons">
+                            <img ng-if="publication.confirmed" ng-src="/images/utilities/inventory/green-checkmark.png" />
+                            <img ng-if="!publication.confirmed" ng-src="/images/utilities/inventory/red-x.png" />
+                        </a>
+                    </td>
+                    <td class="actions ut-normal-font">
+                        <ut-dropdown
+                            icon="icon-cog"
+                            template="/app/partials/publication/grid_actions.html"
+                            data="publication"
+                        >
+                        </ut-dropdown>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-if="!publications[0].gridParams.total" class="no-results">
+            No Results Found
+        </div>
+    </div>
+
+    <div class="ut-fade" ng-include="'/app/partials/grid/pagination_bottom.html'"></div>
+</div>

@@ -1,0 +1,39 @@
+<div class="modal-header">
+    <h3 ng-if="!ethnicity.id">Create Ethnicity</h3>
+    <h3 ng-if="ethnicity.id">Edit Ethnicity {{ ethnicity.id }} - {{ ethnicity.name }}</h3>
+</div>
+<div class="ut-form-body">
+    <div class="modal-body" ut-modal-body>
+        <form id="sample-modal-form" class="form-horizontal">
+            <div class="space-medium">
+
+                <ut-control-group>
+                    <div ng-repeat="globalError in ethnicity.globalErrors" class="ut-global-error">
+                        {{globalError}}
+                    </div>
+                </ut-control-group>
+
+                <ut-control-group label="Name" required>
+                    <ut-input
+                        model="ethnicity.name"
+                        error="ethnicity.errors.name"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <div class="ut-form-divider"></div>
+
+                <ut-control-group label="Attachments">
+                    <ut-attachment-uploader o="Ethnicity" oid="ethnicity.id" trigger="handleUpload"></ut-attachment-uploader>
+                </ut-control-group>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="ethnicity.id">Save</a>
+        <a ng-if="!ethnicity.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

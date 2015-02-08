@@ -1,0 +1,31 @@
+<div class="utilities-filter-container" ng-controller="ContactsFilterController">
+    <ul class="filters-users-list">
+        <li>
+            <input class="init-focus" ng-model="search" type="text" placeholder="Find Contacts..."></input>
+        </li>
+        <ul class="selected" ng-if="filteredContacts.length">
+            <li ng-repeat="filteredContact in filteredContacts">
+                <label>
+                    <input
+                        ng-model="c"
+                        ng-checked="true"
+                        ng-change="toggleContact('remove', filteredContact)"
+                        type="checkbox"
+                    />
+                    <div class="description">{{filteredContact.name}}</div>
+                </label>
+            </li>
+        </ul>
+        <li ng-repeat="contact in contacts | filter:search | orderBy:'groupName'">
+            <label>
+                <input
+                    ng-model="c"
+                    ng-change="toggleContact('append', contact)"
+                    type="checkbox"
+                />
+                <div class="description">{{contact.name}}</div>
+            </label>
+        </li>
+        <li class="help">Start typing for Contacts</li>
+    </ul>
+</div>

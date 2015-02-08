@@ -1,0 +1,166 @@
+<div class="modal-header">
+    <h3 ng-if="!travelLog.id">Create Travel Log</h3>
+    <h3 ng-if="travelLog.id">Edit Travel Log {{ travelLog.id }}</h3>
+</div>
+<div class="ut-form-body">
+    <div class="modal-body" ut-modal-body>
+        <form id="sample-modal-form" class="form-horizontal">
+            <div class="space-medium">
+
+                <ut-control-group>
+                    <div ng-repeat="globalError in travelLog.globalErrors" class="ut-global-error">
+                        {{globalError}}
+                    </div>
+                </ut-control-group>
+
+                <ut-control-group label="Traveler" required>
+                    <ut-typeahead
+                        model="travelLog.Traveler"
+                        key="travelLog.traveler_id"
+                        resource="user"
+                        resource-primary-key="u_id"
+                        placeholder="fullName"
+                        template-url="/app/partials/typeahead/user.html"
+                        disabled
+                        error="travelLog.errors.traveler_id"
+                    </ut-typeahead>
+                </ut-control-group>
+
+                <ut-control-group label="Event" required>
+                    <ut-input
+                        model="travelLog.event"
+                        error="travelLog.errors.event"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Location" required>
+                    <ut-input
+                        model="travelLog.location"
+                        error="travelLog.errors.location"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Departure Date" required>
+                     <input
+                        type="text"
+                        datepicker-popup="M/dd/yyyy"
+                        ng-model="travelLog.departure_date"
+                        class="ut-input"
+                    />
+                    <div ng-if="travelLog.errors.departure_date" class="ut-global-error">{{travelLog.errors.departure_date}}</div>
+                </ut-control-group>
+
+                <ut-control-group label="Return Date" required>
+                    <input
+                        type="text"
+                        datepicker-popup="M/dd/yyyy"
+                        ng-model="travelLog.return_date"
+                        class="ut-input"
+                    />
+                    <div ng-if="travelLog.errors.return_date" class="ut-global-error">{{travelLog.errors.return_date}}</div>
+                </ut-control-group>
+
+                <ut-control-group label="Status" required>
+                    <select ng-model="travelLog.status">
+                        <option value="pending">Pending</option>
+                        <option value="approved">Approved</option>
+                        <option value="denied">Denied</option>
+                    </select>
+                    <div ng-if="travelLog.errors.status" class="ut-global-error">{{travelLog.errors.status}}</div>
+                </ut-control-group>
+
+                <ut-control-group label="Approver" required>
+                    <select ng-model="travelLog.approver_id">
+                        <option value="109">Gay Nell Krauss</option>
+                        <option value="1">James Crowe</option>
+                    </select>
+                    <div ng-if="travelLog.errors.approver_id" class="ut-global-error">{{travelLog.errors.approver_id}}</div>
+                </ut-control-group>
+
+                <ut-control-group label="Purpose" required>
+                    <select ng-model="travelLog.purpose">
+                        <option value="presenter">Presenter</option>
+                        <option value="organizer">Organizer</option>
+                        <option value="attendee">Attendee</option>
+                    </select>
+                    <div ng-if="travelLog.errors.purpose" class="ut-global-error">{{travelLog.errors.purpose}}</div>
+                </ut-control-group>
+
+                <ut-control-group label="Projected Center">
+                    <ut-input
+                        model="travelLog.projected_center"
+                        error="travelLog.errors.projected_center"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Estimated Cost" required>
+                    <ut-input
+                        model="travelLog.estimated_cost"
+                        error="travelLog.errors.estimated_cost"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="RBV Whole">
+                    <ut-input
+                        model="travelLog.rbv_whole"
+                        error="travelLog.errors.rbv_whole"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="RBV in Part">
+                    <ut-input
+                        model="travelLog.rbv_in_part"
+                        error="travelLog.errors.rbv_in_part"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="RBV non VUMC">
+                    <ut-input
+                        model="travelLog.rbv_non_vumc"
+                        error="travelLog.errors.rbv_non_vumc"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Actual Cost">
+                    <ut-input
+                        model="travelLog.actual_cost"
+                        error="travelLog.errors.actual_cost"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Actual Center">
+                    <ut-input
+                        model="travelLog.actual_center"
+                        error="travelLog.errors.actual_center"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Comments">
+                    <textarea class="rich ut-big-text-input" ng-model="travelLog.comments"></textarea>
+                </ut-control-group>
+
+                <div class="ut-form-divider"></div>
+
+                <ut-control-group label="Attachments">
+                    <ut-attachment-uploader o="TravelLog" oid="travelLog.id" trigger="handleUpload"></ut-attachment-uploader>
+                </ut-control-group>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="travelLog.id">Save</a>
+        <a ng-if="!travelLog.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

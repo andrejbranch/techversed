@@ -1,0 +1,56 @@
+<div class="first">
+    Cart Actions:
+</div>
+<table class="action-table">
+    <tr>
+        <td>
+            <select ng-model="model.status">
+                <option value="review">review</option>
+                <option value="processing">processing</option>
+                <option value="finishing">finishing</option>
+            </select>
+        </td>
+        <td>
+            <input ng-click="updateStatus()" type="submit" class="btn btn-primary" value="Update Status"></input>
+        </td>
+    </tr>
+    <tr>
+        <td class="no-padding">
+            <input
+                type="text"
+                datepicker-popup="M/dd/yyyy"
+                ng-model="model.expectedDate"
+                class="ut-input"
+            />
+        </td>
+        <td>
+            <input type="submit" class="btn btn-success" value="Update Expected Date" ng-click="updateExpectedDate()"></input>
+        </td>
+    </tr>
+    <tr>
+        <td class="no-padding">
+            <input
+                type="text"
+                datepicker-popup="M/dd/yyyy"
+                ng-model="model.completionDate"
+                class="ut-input"
+            />
+        </td>
+        <td>
+            <input type="submit" class="btn btn-warning" value="Update Completion Date" ng-click="updateCompletionDate()"></input>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input id="nanodrop" type="file" onchange="angular.element(this).scope().setFile(this)"></input>
+        </td>
+        <td>
+            <input type="submit" ng-click="nanoDropModal()" class="btn btn-danger" value="Upload Nanodrop file"></input>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a ng-click="emptyCart()" class="empty" href="">Empty Cart</a>
+        </td>
+    </tr>
+</table>

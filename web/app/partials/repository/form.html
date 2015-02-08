@@ -1,0 +1,59 @@
+<div class="modal-header">
+    <h3 ng-if="!repository.id">Create Repository</h3>
+    <h3 ng-if="repository.id">Edit Repository {{ repository.id }} - {{ repository.title }}</h3>
+</div>
+<div class="ut-form-body">
+    <div class="modal-body" ut-modal-body>
+        <form id="sample-modal-form" class="form-horizontal">
+            <div class="space-medium">
+
+                <ut-control-group>
+                    <div ng-repeat="globalError in repository.globalErrors" class="ut-global-error">
+                        {{globalError}}
+                    </div>
+                </ut-control-group>
+
+                <ut-control-group label="Title" required>
+                    <ut-input
+                        model="repository.title"
+                        error="repository.errors.title"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Description">
+                    <ut-input
+                        model="repository.description"
+                        error="repository.errors.description"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Samples" class="ut-many-input-max-width">
+                    <ut-one-to-many
+                        resource="sample"
+                        model="repository"
+                        foreign-key="sampleId"
+                        relation="RepositorySamples"
+                        access="repository.samples"
+                        placeholder="description"
+                    />
+                    </ut-one-to-many>
+                </ut-control-group>
+
+                <div class="ut-form-divider"></div>
+
+                <ut-control-group label="Attachments">
+                    <ut-attachment-uploader o="Repository" oid="repository.id" trigger="handleUpload"></ut-attachment-uploader>
+                </ut-control-group>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="repository.id">Save</a>
+        <a ng-if="!repository.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

@@ -1,0 +1,144 @@
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_top.html'"></div>
+<div id="ut-grid-table-container">
+    <table ng-if="donors[0].gridParams.total">
+        <thead>
+            <tr>
+                <th ut-grid-header sort-field="id" label="Id"></th>
+                <th
+                    ut-grid-header
+                    sort-field="first_name"
+                    label="First Name"
+                    ng-show="showColumns.indexOf('first_name') > -1"
+                    allow-sort="true"
+                    ng-if="isCtcUser()"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="last_name"
+                    label="Last Name"
+                    ng-show="showColumns.indexOf('last_name') > -1"
+                    allow-sort="true"
+                    ng-if="isCtcUser()"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Aliases"
+                    ng-show="showColumns.indexOf('aliases') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Species"
+                    ng-show="showColumns.indexOf('species_id') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Ethnicity"
+                    ng-show="showColumns.indexOf('ethnicity_id') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Race"
+                    ng-show="showColumns.indexOf('race_id') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Gender"
+                    ng-show="showColumns.indexOf('gender') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Age"
+                    ng-show="showColumns.indexOf('age') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Created At"
+                    ng-show="showColumns.indexOf('created_at') > -1"
+                    allow-sort="true"
+                    sort-field="created_at"
+                >
+                </th>
+                <th ut-grid-header allow-sort="false"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="donor in donors" class="ut-fade">
+                <td ui-sref="donor({donorId:donor.id})" class="link">{{donor.id}}</td>
+                <td
+                    ng-if="isCtcUser()"
+                    ng-show="showColumns.indexOf('first_name') > -1"
+                >
+                    <div>{{donor.first_name}}</div>
+                </td>
+                <td
+                    ng-if="isCtcUser()"
+                    ng-show="showColumns.indexOf('last_name') > -1"
+                >
+                    <div>{{donor.last_name}}</div>
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('aliases') > -1"
+                >
+                    {{donor.aliases}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('species_id') > -1"
+                >
+                    {{donor.Species.name}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('ethnicity_id') > -1"
+                >
+                    {{donor.Ethnicity.name}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('race_id') > -1"
+                >
+                    {{donor.Race.name}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('gender') > -1"
+                >
+                    {{donor.gender}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('age') > -1"
+                >
+                    {{donor.age}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('created_at') > -1"
+                >
+                    {{donor.created_at | utDate | date:'MM/dd/yy @ h:mma'}}
+                </td>
+                <td class="actions">
+                    <ut-dropdown
+                        icon="icon-cog"
+                        template="/app/partials/donor/grid_actions.html"
+                        data="donor"
+                    >
+                    </ut-dropdown>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div ng-if="!donors[0].gridParams.total" class="no-results">
+        No Results Found
+    </div>
+</div>
+
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_bottom.html'"></div>

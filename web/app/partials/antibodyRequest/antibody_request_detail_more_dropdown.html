@@ -1,0 +1,20 @@
+<div id="sample-detail-more" ng-controller="AntibodyRequestDetailMoreController">
+    <ul>
+        <li ng-if="culture" ng-click="cultureStatusModal(cultureStatus)">
+            <i class="icon-plus"></i>
+            Add To Culture Status Log
+        </li>
+        <li ng-if="culture" ng-click="cultureModal(culture)">
+            <i class="icon-pencil"></i>
+            Edit Culture
+        </li>
+        <li ng-if="!culture" ng-click="cultureModal()">
+            <i class="icon-plus"></i>
+            Create Culture
+        </li>
+        <li ng-if="!culture" ng-click="linkCulture()">
+            <i class="icon-pencil"></i>
+            Link Culture
+        </li>
+    </ul>
+</div>

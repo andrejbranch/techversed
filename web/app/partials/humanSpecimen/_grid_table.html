@@ -1,0 +1,140 @@
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_top.html'"></div>
+
+<div id="ut-grid-table-container">
+    <table id="human-specimen-table" ng-if="humanSpecimens[0].gridParams.total">
+        <thead>
+            <tr>
+                <th ut-grid-header sort-field="id" label="Id"></th>
+                <th
+                    ut-grid-header
+                    label="Donor"
+                    ng-show="showColumns.indexOf('donorId') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="User"
+                    ng-show="showColumns.indexOf('userId') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Requester"
+                    ng-show="showColumns.indexOf('requesterId') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Date of Consent"
+                    ng-show="showColumns.indexOf('dateOfConsent') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Date of Draw"
+                    ng-show="showColumns.indexOf('dateOfDraw') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Protocol"
+                    ng-show="showColumns.indexOf('protocolId') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="created_at"
+                    label="Created At"
+                    ng-show="showColumns.indexOf('created_at') > -1"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="updated_at"
+                    label="Updated At"
+                    ng-show="showColumns.indexOf('updated_at') > -1"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Status"
+                    ng-show="showColumns.indexOf('statusId') > -1"
+                    allow-sort="true"
+                    sort-field="statusId"
+                >
+                </th>
+                <th class="actions"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="humanSpecimen in humanSpecimens" class="ut-fade">
+                <td ui-sref="humanSpecimen({humanSpecimenId:humanSpecimen.id})" class="link">{{humanSpecimen.id}}</td>
+                <td
+                    ng-show="showColumns.indexOf('donorId') > -1"
+                >
+                    <a class="flat-link" ui-sref="donor({donorId:humanSpecimen.Donor.id})">{{humanSpecimen.Donor.toString | truncate:40}}</a>
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('userId') > -1"
+                >
+                    {{humanSpecimen.User.fullName}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('requesterId') > -1"
+                >
+                    {{humanSpecimen.Requester.fullName}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('dateOfConsent') > -1"
+                >
+                    {{humanSpecimen.dateOfConsent | date:'MM/dd/yy'}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('dateOfDraw') > -1"
+                >
+                    {{humanSpecimen.dateOfDraw | date:'MM/dd/yy'}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('protocolId') > -1"
+                >
+                    <a class="flat-link" ui-sref="protocol({protocolId:humanSpecimen.Protocol.id})">{{humanSpecimen.Protocol.protocol}}</a>
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('created_at') > -1"
+                >
+                    {{humanSpecimen.created_at | utDate | date:'MM/dd/yy @ h:mma'}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('updated_at') > -1"
+                >
+                    {{humanSpecimen.updated_at | utDate | date:'MM/dd/yy @ h:mma'}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('statusId') > -1"
+                    class="specimen-status-{{humanSpecimen.statusId}}"
+                >
+                    {{humanSpecimen.Status.status}}
+                </td>
+                <td class="actions">
+                    <ut-dropdown
+                        icon="icon-cog"
+                        template="/app/partials/humanSpecimen/grid_actions.html"
+                        data="humanSpecimen"
+                    >
+                    </ut-dropdown>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div ng-if="!humanSpecimens[0].gridParams.total" class="no-results">
+        No Results Found
+    </div>
+</div>
+
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_bottom.html'"></div>

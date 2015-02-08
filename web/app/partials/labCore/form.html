@@ -1,0 +1,105 @@
+<div class="modal-header">
+    <h3 ng-if="!labCore.id">Create Lab Core</h3>
+    <h3 ng-if="labCore.id">Edit Lab Core {{ labCore.id }} - {{ labCore.name }}</h3>
+</div>
+<div class="ut-form-body">
+    <div class="modal-body" ut-modal-body>
+        <form id="sample-modal-form" class="form-horizontal">
+            <div class="space-medium">
+
+                <ut-control-group>
+                    <div ng-repeat="globalError in labCore.globalErrors" class="ut-global-error">
+                        {{globalError}}
+                    </div>
+                </ut-control-group>
+
+                <ut-control-group label="Name" required>
+                    <ut-input
+                        model="labCore.name"
+                        error="labCore.errors.name"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Slug">
+                    <ut-input
+                        model="labCore.slug"
+                        error="labCore.errors.slug"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Mission" required>
+                    <ut-input
+                        model="labCore.mission"
+                        error="labCore.errors.mission"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Website">
+                    <ut-input
+                        model="labCore.website"
+                        error="labCore.errors.website"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <div class="ut-form-divider"></div>
+
+                <ut-control-group label="Street" required>
+                    <ut-input
+                        model="labCoreContact.street"
+                        error="labCoreContact.errors.street"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="City" required>
+                    <ut-input
+                        model="labCoreContact.city"
+                        error="labCoreContact.errors.city"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="State" required>
+                    <ut-input
+                        model="labCoreContact.state"
+                        error="labCoreContact.errors.state"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Zip" required>
+                    <ut-input
+                        model="labCoreContact.zip"
+                        error="labCoreContact.errors.zip"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Phone Number" required>
+                    <ut-input
+                        model="labCoreContact.phone"
+                        error="labCoreContact.errors.phone"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <div class="ut-form-divider"></div>
+
+                <ut-control-group label="Attachments">
+                    <ut-attachment-uploader o="LabCore" oid="labCore.id" trigger="handleUpload"></ut-attachment-uploader>
+                </ut-control-group>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="labCore.id">Save</a>
+        <a ng-if="!labCore.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

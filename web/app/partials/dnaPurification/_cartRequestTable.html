@@ -1,0 +1,37 @@
+<div ng-if="!hasCart()">
+    Your cart is currently empty
+</div>
+<table id="cart-request-preview-table" ng-if="hasCart()">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Sample</th>
+            <th>Status</th>
+            <th>Expected Date</th>
+            <th>Concentration</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="purificationRequest in purificationRequests">
+            <td>
+                {{purificationRequest.DnaPurification.id}}
+            </td>
+            <td >
+                {{purificationRequest.DnaPurification.Sample.description}}
+            </td>
+            <td>
+                {{purificationRequest.DnaPurification.status}}
+            </td>
+            <td>
+                {{purificationRequest.DnaPurification.expectedDate}}
+            </td>
+            <td>
+                {{purificationRequest.DnaPurification.concentration}}
+            </td>
+            <td class="cart-icon">
+                <span ng-if="purificationRequest" class="ut-icon-minus" ng-click="removeFromCart(purificationRequest.DnaPurification)"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>

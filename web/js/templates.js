@@ -1,4 +1,4 @@
-define(["app"], function (app) { app.run(["$templateCache", function($templateCache) { if (Utilities.requirejsDebug && Utilities.env == "dev") { return; }   'use strict';
+define(["app"], function (app) { app.run(["$templateCache", function($templateCache) { if (Techversed.requirejsDebug && Techversed.env == "dev") { return; }   'use strict';
 
   $templateCache.put('/app/partials/antibodyRequest/_culture_module.html',
     "<div class=\"ut-relative-plus-icon\" ng-if=\"canEdit()\" ng-click=\"cultureModal(culture)\">\n" +

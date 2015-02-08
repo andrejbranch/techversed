@@ -11,7 +11,7 @@ class NavigationGroupRepository extends EntityRepository
         return $this->createQueryBuilder('n')
             ->where('n.parentGroup IS NULL')
             ->getQuery()
-            ->execute()
+            ->getArrayResult()
         ;
     }
 }

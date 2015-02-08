@@ -36,7 +36,7 @@ module.exports = function(grunt) {
                 options: {
                     prefix: '/',
                     bootstrap: function (module, script) {
-                        return 'define(["app"], function (app) { app.run(["$templateCache", function($templateCache) { if (Utilities.requirejsDebug && Utilities.env == "dev") { return; } ' + script + '}]) })'
+                        return 'define(["app"], function (app) { app.run(["$templateCache", function($templateCache) { if (Techversed.requirejsDebug && Techversed.env == "dev") { return; } ' + script + '}]) })'
                     }
                 }
             }

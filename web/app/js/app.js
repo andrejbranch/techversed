@@ -13,11 +13,12 @@ define([
     'uiBootstrapProgressBar',
     'uiBootstrapTransition',
     'services',
+    'services/models',
     'controllers',
     'directives',
     'filters',
+    'controllers/navigationController'
 ], function (angular) {
-    'use strict';
 
     var html, utilitiesApp
 

@@ -5,3 +5,10 @@ techversed_main_homepage:
 techversed_hello_test:
     path:     /hello/{name}
     defaults: { _controller: TechversedMainBundle:Default:index }
+
+navigation_group_query:
+    path:     /api/v1/navigation-group
+    defaults:
+        _controller: TechversedMainBundle:NavigationGroup:query
+    requirements:
+        _method: get

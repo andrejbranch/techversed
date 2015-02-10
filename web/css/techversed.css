@@ -1,41 +1,91 @@
-#navigation-container {
-  height: 55px;
-  background: #fefefe;
-}
-#navigation-container ul {
-  margin-right: auto;
-  margin-left: auto;
-  display: table;
-  height: 55px;
-  background: url(/images/techversed_logo.png) no-repeat 278px;
-  background-size: 200px;
-}
-#navigation-container ul li {
-  display: inline-block;
+.navFont {
   font-family: 'Raleway', Arial;
   color: #494949;
   font-weight: 500;
   text-transform: uppercase;
   text-shadow: none !important;
   font-size: 14px;
+}
+.navBackground {
+  background: rgba(255, 255, 255, 0.7);
+}
+#navigation-container {
+  height: 55px;
+  background: rgba(255, 255, 255, 0.7);
+}
+#navigation-container .inner {
+  background: transparent;
+}
+#navigation-container ul.group-list {
+  margin-right: auto;
+  margin-left: auto;
+  display: table;
+  height: 55px;
+  background: url(/images/techversed_logo.png) no-repeat 315px;
+  background-size: 200px;
+}
+#navigation-container ul.group-list li.group {
+  font-family: 'Raleway', Arial;
+  color: #494949;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-shadow: none !important;
+  font-size: 14px;
+  position: relative;
+  display: inline-block;
   text-align: center;
-  line-height: 40px;
+  line-height: 47px;
   margin-top: 8px;
-  margin-right: 20px;
+  margin-right: 8px;
   padding: 0 5px 0 5px;
 }
-#navigation-container ul li:hover {
+#navigation-container ul.group-list li.group .title {
+  padding: 11px 10px;
+}
+#navigation-container ul.group-list li.group:hover .title {
   background: rgba(183, 209, 16, 0.7);
   color: white;
   cursor: pointer;
 }
-#navigation-container ul li:nth-child(3) {
+#navigation-container ul.group-list li.group:hover .group-children-container {
+  display: block;
+}
+#navigation-container ul.group-list li.group:nth-child(3) {
   margin-right: 200px;
+}
+#navigation-container .group-children-container {
+  background: rgba(255, 255, 255, 0.7);
+  display: none;
+  position: absolute;
+  top: 47px;
+  left: 5px;
+}
+#navigation-container .group-children-container ul.child-list {
+  margin: 8px 0px;
+}
+#navigation-container .group-children-container ul.child-list li.child {
+  font-family: 'Raleway', Arial;
+  color: #494949;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-shadow: none !important;
+  font-size: 14px;
+  font-size: 11px;
+  line-height: 20px;
+  white-space: nowrap;
+  padding: 3px 41px;
+}
+#navigation-container .group-children-container ul.child-list li.child:hover {
+  background: rgba(183, 209, 16, 0.7);
+  color: white;
+  cursor: pointer;
 }
 body {
   margin: 0;
+  background: #414141;
 }
 ul {
   margin: 0;
   padding: 0;
+  list-style-type: none;
 }

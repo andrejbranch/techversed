@@ -17,7 +17,8 @@ define([
     'controllers',
     'directives',
     'filters',
-    'controllers/navigationController'
+    'controllers/navigationController',
+    'directives/navigationGroup'
 ], function (angular) {
 
     var html, utilitiesApp

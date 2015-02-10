@@ -1,34 +1,80 @@
+@navBackgroundColor: rgba(255,255,255, 0.7);
+@navFontColor: #494949;
+@navHighlightColor: rgba(183,209,16,0.7);
+
+.navFont {
+    font-family: 'Raleway',Arial;
+    color: @navFontColor;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-shadow: none !important;
+    font-size: 14px;
+}
+
+.navBackground {
+    background: @navBackgroundColor;
+}
+
 #navigation-container {
     height: 55px;
-    background: rgb(254,254,254);
-    ul {
+    .navBackground;
+    .inner {
+        background: transparent;
+    }
+    ul.group-list {
         margin-right: auto;
         margin-left: auto;
         display: table;
         height: 55px;
-        background: url(/images/techversed_logo.png) no-repeat 278px;
+        background: url(/images/techversed_logo.png) no-repeat 315px;
         background-size: 200px;
-        li {
+        li.group {
+            .navFont;
+            position: relative;
             display: inline-block;
-            font-family: 'Raleway',Arial;
-            color: #494949;
-            font-weight: 500;
-            text-transform: uppercase;
-            text-shadow: none !important;
-            font-size: 14px;
             text-align: center;
-            line-height: 40px;
+            line-height: 47px;
             margin-top: 8px;
-            margin-right: 20px;
+            margin-right: 8px;
             padding: 0 5px 0 5px;
+            .title {
+                padding: 11px 10px;
+            }
             &:hover {
-                background: rgba(183,209,16,0.7);
-                color: white;
-                cursor: pointer;
+                .title {
+                    background: @navHighlightColor;
+                    color: white;
+                    cursor: pointer;
+                }
+                .group-children-container {
+                    display: block;
+                }
+            }
+            &:nth-child(3) {
+                margin-right: 200px;
             }
         }
-        li:nth-child(3) {
-            margin-right: 200px;
+    }
+    .group-children-container {
+        .navBackground;
+        display: none;
+        position: absolute;
+        top: 47px;
+        left: 5px;
+        ul.child-list {
+            margin: 8px 0px;
+            li.child {
+                .navFont;
+                font-size: 11px;
+                line-height: 20px;
+                white-space: nowrap;
+                padding: 3px 41px;
+                &:hover {
+                    background: @navHighlightColor;
+                    color: white;
+                    cursor: pointer;
+                }
+            }
         }
     }
 }
